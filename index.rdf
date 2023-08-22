@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:foaf="http://xmlns.com/foaf/0.1/"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:cert="http://www.w3.org/ns/auth/cert#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#">
+
+  <foaf:PersonalProfileDocument rdf:about="https://hvdsomp.info/">
+    <rdfs:seeAlso rdf:resource="https://hvdsomp.info/presentations/"/>
+    <rdfs:seeAlso rdf:resource="https://hvdsomp.info/bio/"/>
+    <rdfs:seeAlso rdf:resource="https://hvdsomp.info/papers/"/>
+    <rdfs:seeAlso rdf:resource="https://hvdsomp.info/etceteras/"/>
+    <rdfs:seeAlso rdf:resource="https://hvdsomp.info/specifications/"/>
+    <foaf:primaryTopic rdf:resource="https://hvdsomp.info/#me"/>
+  </foaf:PersonalProfileDocument>
+
+  <cert:RSAPublicKey rdf:about="https://hvdsomp.info/#podcert">
+    <cert:exponent rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">65537</cert:exponent>
+    <cert:modulus rdf:datatype="http://www.w3.org/2001/XMLSchema#hexBinary">D86084063C05F36BF0291D6BC1A9505C0D65E1A1ED831DAE9BB0E08DAA248C5C4B02DE038F8F0BD9F26871E55C34144F66749E9CD492024A6E5715FBC793EA1066A548CFF6A7EC1D294B7F1093E32896D5C817504B18493E0515202B6CAE2EC414ADC52E10E2F3C5D3300BDB32873B26DDBBD618F2B86B8B0A209BA91E545801B1223E9447C8F561A2C9C3387EDDD8D2DA43E0BD9F92BCD3C607A1D56994375FC2534E4D6462E9891B0AE8EA222D5A587811E362748E3B65293A25BDA7BFCF9677B817DDD7F0D18D0C8F5D7FAC360000290E4AFC38BC95619305A5523ECBE419E86F3D1E69359735D7DF616868BA38D882CC611BF019B538056591F3B0DEAE2D</cert:modulus>
+  </cert:RSAPublicKey>
+
+  <foaf:Person rdf:about="https://hvdsomp.info/#i">
+    <owl:sameAs rdf:resource="http://orcid.org/0000-0002-0715-6126"/>
+    <foaf:account rdf:resource="https://twitter.com/hvdsomp"/>
+    <foaf:account rdf:resource="https://slideshare.com/hvdsomp"/>
+    <foaf:account rdf:resource="https://youtube.com/hvdsomp"/>
+    <foaf:account rdf:resource="https://www.linkedin.com/in/herbertvandesompel/"/>
+    <foaf:account rdf:resource="https://scholar.google.com/citations?user=mIQeK38AAAAJ"/>
+    <foaf:account rdf:resource="http://dblp.uni-trier.de/pers/hd/s/Sompel:Herbert_Van_de.html"/>
+    <foaf:interest rdf:resource="https://en.wikipedia.org/wiki/Web_archiving"/>
+    <foaf:interest rdf:resource="https://en.wikipedia.org/wiki/Scholarly_communication"/>
+    <foaf:interest rdf:resource="https://en.wikipedia.org/wiki/World_Wide_Web"/>
+    <foaf:homepage rdf:resource="https://hvdsomp.info/"/>
+    <foaf:img rdf:resource="https://hvdsomp.info/images/herbert_icon.png"/>
+    <foaf:page rdf:resource="https://hvdsomp.info/"/>
+    <foaf:page rdf:resource="https://en.wikipedia.org/wiki/Herbert_Van_de_Sompel"/>
+    <cert:key rdf:resource="https://hvdsomp.info/#podcert"/>
+    <foaf:familyName xml:lang="en">Van de Sompel</foaf:familyName>
+    <foaf:givenName xml:lang="en">Herbert</foaf:givenName>
+    <foaf:mbox rdf:resource="mailto:hvdsomp@gmail.com"/>
+    <foaf:nick xml:lang="en">hvdsomp</foaf:nick>
+  </foaf:Person>
+
+</rdf:RDF>

@@ -1,0 +1,55 @@
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix wdt: <http://www.wikidata.org/prop/direct/> .
+@prefix wd: <http://www.wikidata.org/entity/> .
+@prefix org: <http://www.w3.org/ns/org> .
+@prefix dbo: <http://dbpedia.org/ontology/> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns> .
+
+<> a foaf:PersonalProfileDocument;
+   foaf:maker <https://hvdsomp.info/#me>;
+   rdfs:seeAlso <https://hvdsomp.info/presentations/>,
+     <https://hvdsomp.info/bio/>,
+     <https://hvdsomp.info/papers/>,
+     <https://hvdsomp.info/etceteras/>,
+     <https://hvdsomp.info/specifications/>;
+   foaf:primaryTopic <https://hvdsomp.info/#me> .
+
+<https://hvdsomp.info/#me> a foaf:Person;
+   foaf:familyName "Van de Sompel"@en;
+   foaf:givenName "Herbert"@en;
+   foaf:img <images/herbert_profile.jpg>;
+   foaf:publications <http://dblp.uni-trier.de/pid/s/HerbertVandeSompel.ttl>,
+      <https://hvdsomp.info/papers/>, 
+      <https://hvdsomp.info/specifications/>,
+      <https://hvdsomp.info/presentations/>,
+      <https://scholar.google.com/citations?user=mIQeK38AAAAJ>; 
+   foaf:homepage <https://hvdsomp.info/>;
+   foaf:account <https://orcid.org/0000-0002-0715-6126>, 
+      <https://w3c.social/@hvdsomp>,
+      <https://twitter.com/hvdsomp>,
+      <https://slideshare.com/hvdsomp>,
+      <https://youtube.com/hvdsomp>;
+   wdt:P496 <https://orcid.org/0000-0002-0715-6126>;
+   dbo:orcidId "0000-0002-0715-6126";
+   wdt:P4033 "hvdsomp@w3c.social"@en ;
+   foaf:workplaceHomepage <https://www.ugent.be/ea/idlab/>,
+      <https://www.ugent.be/>,
+      <https://dans.knaw.nl>;
+   org:member <http://idlab.technology/#organization>,
+      <http://dbpedia.org/resource/Ghent_University>,
+      <https://dans.knaw.nl> ; 
+   vcard:email <mailto:hvdsomp@gmail.com>;
+   vcard:title "Guest Professor"@en;
+   vcard:title "Research Fellow"@en;
+   foaf:page <https://en.wikipedia.org/wiki/Herbert_Van_de_Sompel>;
+   foaf:page <https://www.wikidata.org/wiki/Q5735804>;
+   foaf:interest <https://en.wikipedia.org/wiki/Web_archiving>;
+   foaf:interest wd:Q2062069;
+   foaf:interest <https://en.wikipedia.org/wiki/Scholarly_communication>;
+   foaf:interest wd:Q7432048;
+   foaf:interest <https://en.wikipedia.org/wiki/World_Wide_Web>;
+   foaf:interest wd:Q466.
