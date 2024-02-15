@@ -5,9 +5,9 @@
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix wdt: <http://www.wikidata.org/prop/direct/> .
 @prefix wd: <http://www.wikidata.org/entity/> .
-@prefix org: <http://www.w3.org/ns/org> .
+@prefix org: <http://www.w3.org/ns/org#> .
 @prefix dbo: <http://dbpedia.org/ontology/> .
-@prefix vcard: <http://www.w3.org/2006/vcard/ns> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 
 <> a foaf:PersonalProfileDocument;
    foaf:maker <https://hvdsomp.info/#me>;
