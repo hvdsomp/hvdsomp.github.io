@@ -222,13 +222,13 @@ body {
 ----------------------------------------------- */
 #content {
   float:left;
-  width:600px;
+  width:800px;
   }
 #maincol
 {
   margin-top:-8px;
   float:left;
-  width:600px;
+  width:800px;
   text-align:left;
   background-color:#fff;
 }
