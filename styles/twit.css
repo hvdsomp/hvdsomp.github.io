@@ -222,14 +222,14 @@ body {
 ----------------------------------------------- */
 #content {
   float:left;
-  width:800px;
+  width:600px;
   }
 #maincol
 {
   margin-top:-8px;
   float:left;
-  width:800px;
-  text-align:justify;
+  width:600px;
+  text-align:left;
   background-color:#fff;
 }
 /* Navbar Top
