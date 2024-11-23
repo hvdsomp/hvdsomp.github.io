@@ -203,7 +203,7 @@ ol.nested-counter-list ol {
     a long time after the link to the resource was put in place. It is an approach to combat link rot and content drift, which are prevalent on the Web.
     This document describes how to robustify links in HTML pages. It recommends creating one or more snapshots of a resource 
     around the time of linking to it, for example, in a web archive or a versioning system. And it recommends creating a Robust Link 
-    by conveying the following information as attributes on the link to the linked resource: 
+    by conveying the following information as attributes on the link to a resource: 
     the URI of the resource, the intended linking datetime, and the URIs of one or more snapshots of the linked resource as well as their respective 
     datetimes. 
     </div></div>
@@ -275,8 +275,9 @@ in its current state and in the state it was around the time it was linked. The 
      client applications can be devised that support:
     <ul>
     <li>Visiting the linked resource some time after it was linked to, as is the case with any link.</li>
-    <li>Finding snapshots that are temporally close the intended linking date, in case created snapshots become temporally or permanently inaccessible.</li>
-    <li>Visiting each created snapshot.</li> 
+    <li>Finding snapshots that are temporally close the intended linking date, in case no snapshots were created around the time of linking, 
+    or if snapshots that were created become temporally or permanently inaccessible.</li>
+    <li>Visiting each snapshot that was created.</li> 
     <li>Finding snapshots that are temporally close the dates snapshots were created, in case those snapshots becomes temporally or permanently inaccessible.</li> 
      </ul>  
   </div>
