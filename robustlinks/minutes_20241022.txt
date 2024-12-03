@@ -1,0 +1,56 @@
+Robust Links Meetings Notes, 20241022, Herbert, Martin, Michael, Sawood
+
+(1) Overall, the essence of the discussion indicates a future with a clear distinction between the RL annotations in HTML and the software that consumes them. The RL tools in the IIPC GitHub can then be considered reference implementations of RL-consuming client code and other implementations can co-exist. This also means that the Robust Links branding in tools as such becomes of less importance. Adoption of the spec core.
+
+(2) Regarding changes to the RL annotations:
+
+- data-versionurl to allow conveying multiple Mementos
+- each Memento in data-versionurl can have an associated optional memento-datetime
+- name of archive will not be included in annotation (can be implemented in software based on baseURL of memento)
+- syntax for data-versionurl is a space delimited list of memento-url followed by optional memento-datetime, i.e. URI-M1 memento-datetime1 URI-M2 URI-M3 memento-datetime3
+- spec to make clear that data-versiondate is the "intended" datetime for a link
+- spec to make clear that the memento-datetimes are the actual archival datetimes of listed mementos
+- existing data-versionurl annotations are compatible with this new approach; they are actually the simplest possible annotation according to the new spec
+
+=> Action items: 
+- Herbert to create a draft version of a revised spec and share with all. The draft will not overwrite the existing spec but be shared at some other temp URI.
+
+(3) Regarding the CSS and JavaScript in the IIPC Github repository
+
+- will be revised to reflect changed data-versionurl approach
+- will be revised to better isolate RL code from other code in the HTML in which it is embedded
+- strong preference expressed by all to keep the reference implementation for the new spec in the IIPC GitHub repo, accessible with existing DOI redirects, i.e. replace existing code
+
+=> Action items: 
+- Sawood to explore which resources will be used for revision of code that will eventually replace the existing code in the IIPC GitHub repo
+
+(4) Regarding eventual publication of updated RL spec
+
+- strong preference for a neutral publication environment
+- strong preference to keep the RL name associated with the spec (implementations can have whichever name they prefer), among others because the name is used in literature etc.
+- authorship to include existing author names + new authors e.g. Sawood, Mark (?)
+- spec should move away from mementoweb.org and get its "own spot". candidates include a robustlinks domain name, a dedicated RL github repository (RobustLinks organization is taken. By whom?), the IIPC GitHub repository (the code is there)
+
+=> Action items: 
+- Sawood to discuss this perspective regarding spec publication with Mark
+
+(5) Other existing software that leverages RL annotations
+
+- Other known software that leverages RL annotations and might be affected by changes to data-versionurl are: 
+a) Memento Time Travel for the Web browser extension ; 
+b) Zotero RL extension
+c) the robustify.js code (https://github.com/renevoorburg/robustify.js)
+
+=> Action items:
+- Martin/Shawn to check whether (a) could gracefully deal with new style data-versionurl (by creating synthetic example) or whether it would need updating
+- Martin/Shawn to check whether/how the Zotero RL extension would be affected and need updating
+- Herbert to ping Rene Voorburg about upcoming changes re data-versionurl
+
+(5) RL API/service
+
+- It seems that the service/API is down most of the time now. 
+- same holds for TimeTravel. 
+
+=> Action items:
+- A discussion is needed to decide whether to keep the services accessible at mementoweb.org or to remove them and resort back to a mementoweb.org that promotes Memento, i.e. only the current Memento Project pages
+- Sawood to reflect on the possibility to run an aggregator anda  RL API/service at IA
