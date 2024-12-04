@@ -1,0 +1,54 @@
+Robust Links Meetings Notes, 20241204, Herbert, Shawn, Michael, Sawood
+
+(0) The focus of the meeting is on the first draft of the revision of the Robust Links spec, archived at http://web.archive.org/web/20241204080035/https://hvdsomp.info/robustlinks/. The technical discussion issues highlighted in red are discussed.
+
+(1) Issue 1: delimiter in data-versionurl
+
+- content of data-versionurl was supposed to be inspired by content of srcset but srcset is comma delimited, not space delimited.
+
+- after discussion it is decided to diverge from the srcset approach and stick with the space-delimited approach for data-versionurl because parsing the content on commas could be problematic since URIs can contain commas. This is a problem probably not faced by srcset because it generally contains simple image filenames.
+
+(2) Issue 2: granularity and format of dates
+
+- original spec supports day granularity expressed as YYYY-MM-DD for data-versiondate. addition of optional dates for mementos expressed in data-versionurl raises the question of support for finer granularity and syntax.
+
+- decision that finer granularity must be supported for all dates, both in data-versiondate and in data-versionurl
+
+- decision to support 2 granularities: date and full datetime
+
+- decision to support 2 formats: ISO8601 and memento-URL date formats:
+. ISO8601: YYYY-MM-DD (to be interpreted as noon UCT) ; YYYY-MM-DDThh:mm:ssZ
+. memento-URL format: 8-digit (to be interpreted as noon UCT) ; 14-digit
+
+- decision to stick with attribute name data-versiondate
+
+- spec needs to mention not to provide granularity finer than what is known
+
+(3) Issue 3: use of data-versionurl in scenario 2
+
+- working on the draft spec raised the issue of whether to support data-versionurl in scenario 2, and, if so, what its semantics would be.
+
+- a very interesting discusion leads to a new perspective regarding the use of attributes in which href is not leveraged as an integral part of the RL approach to convey the essential information. rather, it is recommended to always use data-originalurl, data-versionurl, and data-versiondate even if that yields redundancy with the URL in href. data-originalurl conveys the URL of the resource for which data-versionurl provides one or more memento URLs. data-versiondate conveys the intended date(time) of linking. There is significant enthusiasm for the revised approach.
+
+- in this approach, the scenarios 1 and 2 still exist but they don't dictate the use of attributes. they merely indicate the preference of the linker. 
+
+- among other for backwards compatibility, a RL without data-originalurl should be interpreted by tools has having the originalurl in href
+
+- a relevant side discussion explores the "memento (URI-M2) of a memento (URI-M1)" scenario, which can gracefully be handled in the revised approach by having URI-M1 in data-originalurl and URI-M2 in data-versionurl. Should be added as an example. 
+
+(4) Issue 4: any URI or only HTTP(S) URIs?
+
+- this issue was not yet discussed
+
+(5) Various:
+
+- Martin had reported via email that the Memento extension no longer works in Chrome. Still works in FireFox and does the right thing with the revised data-versionurl: picks the first listed memento.
+
+- Shawn reports that Zotero RL extension is broken.
+
+- Overall acknowledgment that the LANL memento infrastructure is breaking down. Discussion needed to determine a graceful exit/degradation for the various tools and the memento web site.
+
+- Brief discussion regarding the DOI-ed CSS and JS files in the IIPC repository. Agreement that these should eventually be updated as a reference implementation. Agreement that revision should be able to deal with existing RL annotations. Observation by Sawood (confirmed by Shawn) that the JS is OK with regard to isolation of variables/parameters.
+
+- Sawood discussed item (4) of the previous meeting (see https://hvdsomp.info/robustlinks/minutes_20241022.txt) with Mark. Positive outcome: Mark is OK with the Robust Links name & with provision of the spec on some neutral (to be decided) site.
+
