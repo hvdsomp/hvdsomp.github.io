@@ -280,9 +280,9 @@ As shown in the <a href="#scenarios">scenarios</a>, depending on the motivation 
     <div class="t100_2"><div class="style3">
     <a id="robust-links"><h1>2. How to provide Robust Links?</h1></a>
     
-    As is the case with any link in HTML, the default link target is provided by the <code>href</code> attribute. But a link to a resource can be turned into a Robust Link 
+    As is the case with any link in HTML, the default link target is provided by the <code>href</code> attribute for the HTML <code>anchor (&lt;a&gt;)</code> element. But a link to a resource can be turned into a Robust Link 
     by including three <a href="https://html.spec.whatwg.org/#embedding-custom-non-visible-data-with-the-data-*-attributes">extension attributes</a> for 
-            the HTML <code>anchor (&lt;a&gt;)</code> element: <code>data-originalurl</code>, <code>data-versiondate</code>, and <code>data-versionurl</code>. 
+            that element: <code>data-originalurl</code>, <code>data-versiondate</code>, and <code>data-versionurl</code>. 
        Use of each attribute is recommended and their value is as follows:
                 <br />
 
@@ -301,7 +301,7 @@ As shown in the <a href="#scenarios">scenarios</a>, depending on the motivation 
     </ul>
     </ul>   
 
-      When the <code>data-*</code> attributes are provided in a machine-actionable manner, as detailed in the below sub-sections, 
+      When these <code>data-*</code> attributes are provided in a machine-actionable manner, as detailed in the below sub-sections, 
       client applications can be devised that support several pathways to visit a linked resource:
     <ul>
     <li>Using <code>data-originalurl</code>: Visiting the resource after it was linked to.</li>
