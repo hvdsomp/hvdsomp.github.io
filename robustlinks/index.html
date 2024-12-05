@@ -155,7 +155,7 @@ ol.nested-counter-list ol {
     EXPERIMENTAL DRAFT REVISION OF <a href="https://robustlinks.mementoweb.org/spec/">https://robustlinks.mementoweb.org/spec/</a>
   </div>
   <br />
-         Last updated: November 26, 2024
+         Last updated: December 5, 2024
         </div>
 
 
@@ -179,9 +179,6 @@ ol.nested-counter-list ol {
     
   <div class="style3">
     <div class="t100_2"><b>Authored by: </b><br>
-    <div class="t100_2" style="color:red;">
-    needs updating
-  </div>
       <div class="t100_2">
     &nbsp;&nbsp;&nbsp;Martin Klein - Pacific Northwest National Laboratory
   </div>
@@ -201,6 +198,20 @@ ol.nested-counter-list ol {
     &nbsp;&nbsp;&nbsp;Herbert Van de Sompel - Data Archiving and Networking Services (DANS)
   </div>
 </div>
+
+    <div class="t100_2" style="color:red;">
+    <br />
+    Need to discuss: 
+    <ul>
+    <li>Authorship</li>
+    <li>Can all of this be restricted to http(s) or does it need to be URIs in general?</li>
+    <li>Section "Archiving Considerations” to discuss some recommendations on how archival replay systems should or should not rewrite URLs in data-* attributes.</li>
+    <li>Section "Security Considerations" for clients that consume RL annotations</li>
+    <li>Where to publish</li>
+    <li>DOI-ed CSS and JS</li>
+    <li>Existing tools and documentation</li>
+    </ul>
+     </div>
 
   
     <div class="t100_2"><div class="style3">
@@ -223,18 +234,18 @@ ol.nested-counter-list ol {
 <ol class="nested-counter-list">
 <li><a href="#intro">Why robustify links?</a></li>
 <li><a href="#robust-links">How to robustify links?</a>
+<li><a href="#data-attributes">Robust Links attributes</a></li>
   <ol>
-  <li><a href="#data-attributes">Robust Links attributes</a>
-    <ol>
-    <li><a href="#data-versiondate"><code>data-versiondate</code></a></li>
-    <li><a href="#data-versionurl"><code>data-versionurl</code></li>
-    <li><a href="#data-originalurl"><code>data-originalurl</code></li>
-    </ol>
-  </li>
+  <li><a href="#href"><code>href</code></a></li>
+  <li><a href="#data-versiondate"><code>data-versiondate</code></a></li>
+  <li><a href="#data-versionurl"><code>data-versionurl</code></li>
+  <li><a href="#data-originalurl"><code>data-originalurl</code></li>
+  </ol>
+<li><a href="#scenarios">Scenarios</a></li>
+  <ol>
   <li><a href="#link-original">Scenario 1: The URI of the web resource is provided in <code>href</code></a></li>
   <li><a href="#link-memento">Scenario 2: The URI of a snapshot of the web resource is provided in <code>href</code></a></li>
   </ol>
-<li><a href="#motivation">Detailed motivation</a></li>
 </ol>
 </div>  
   
@@ -248,27 +259,38 @@ ol.nested-counter-list ol {
     This can be important because it is well known that, as time goes by, the content of any web resource changes (content drift) 
     or the resource vanishes altogether (link rot; 404 Not Found).
   <br /><br />
-  Robust Links combat link rot and content drift by annotating a link with information that supports revisiting prior states of the linked resource. 
-  For example, in this example the linking date and the URI of a snapshot of the linked resource 
-  that was created around the time of linking are provided as attributes on a link:
+  Robust Links combat link rot and content drift by annotating a link to a resource with information that supports revisiting 
+  various states of the linked resource. 
+  In the below example, the URI of a resource is provided in <code>data-originalurl</code>, 
+                   the URI of a snapshot of the linked resource that was created around the time of linking is provided in <code>data-versionurl</code>,
+                   and the linking date is provided in <code>data-versiondate</code>:
   <pre>&lt;a href="https://www.w3.org/"
+   data-originalurl="https://www.w3.org/"
    data-versiondate="2024-11-21" 
    data-versionurl="https://web.archive.org/web/20241121100333/https://www.w3.org/"&gt;
 Robust Link to the W3C home page that supports revisiting the way it looked on November 21th 2024
 &lt;/a&gt;
 </pre>
-The attributes provided on the link can be leveraged by client applications to offer several pathways to visit the linked resource, both 
-in its current state and in the state it was around the time it was linked. The section <a href="#motivation">Detailed motivation</a> provides a detailed  
-    motivation for robustifying links and for the Robust Links approach to do so.  
+The <code>data-*</code> attributes provided on the link can be leveraged by client applications to offer several pathways to visit the linked resource, 
+both in its current state (using <code>data-originalurl</code>) and in the state it was around the time it was linked (using <code>data-versionurl</code> and <code>data-versiondate</code>). 
+Meanwhile, the URI provided in <code>href</code> remains the default target of the link as was intended by the linker. 
+As shown in the <a href="#scenarios">scenarios</a>, depending on the motivation for linking, that can be the URI of a snapshot of a resource or, more commonly, the URI of the resource itself.
     </div></div>
   
     <div class="t100_2"><div class="style3">
     <a id="robust-links"><h1>2. How to robustify links?</h1></a>
-    A link to a web resource can be robustified by including the following information as <b>attributes on the link</b>:
+    
+    As is the case with any link in HTML, the default link target is provided by the <code>href</code> attribute. But a link to a resource can be robustified by including three <a href="https://html.spec.whatwg.org/#embedding-custom-non-visible-data-with-the-data-*-attributes">extension attributes</a> for 
+            the HTML <code>anchor (&lt;a&gt;)</code> element: <code>data-originalurl</code>, <code>data-versiondate</code>, and <code>data-versionurl</code>. 
+       Use of each attribute is recommended and their value is as follows:
+                <br />
+
     <ul>
-    <li>The <b>URI of the linked resource</b>.</li>
-    <li>The intended <b>date of linking to the resource</b>, i.e. the date of the state of the resource that the linker wants the link visitor to be able to experience.</li>
-    <li>The <b>URI of one or more snapshots of the linked resource</b>, optionally accompanied by the <b>date those snapshots were created</b>. 
+    <li><code>data-originalurl</code>: The <b>URI of the resource</b> that motivates the provision of a Robust Link.</li>
+    <li><code>data-versiondate</code>: The intended <b>date of linking to the resource</b>, 
+         i.e. the date of the state of the resource that the linker wants the link visitor to be able to experience.</li>
+    <li><code>data-versionurl</code>: The <b>URI of one or more snapshots of the resource</b>, 
+    optionally accompanied by the <b>date those snapshots were created</b>. 
     Creation of snapshots of the linked resource is recommended and can, for example, be achieved as follows:
     <ul>
     <li>Some web archives provide services that allow 
@@ -278,124 +300,151 @@ in its current state and in the state it was around the time it was linked. The 
     </ul>
     </ul>   
 
-     When this information is provided in a machine-actionable manner, as detailed in the below sub-sections, 
-     client applications can be devised that support:
+      When the <code>data-*</code> attributes are provided in a machine-actionable manner, as detailed in the below sub-sections, 
+      client applications can be devised that support several pathways to visit a linked resource:
     <ul>
-    <li>Visiting the linked resource some time after it was linked to, as is the case with any link.</li>
-    <li>Finding snapshots that are temporally close the intended linking date, in case no snapshots were created around the time of linking, 
-    or if snapshots that were created become temporally or permanently inaccessible.</li>
-    <li>Visiting each snapshot that was created.</li> 
-    <li>Finding snapshots that are temporally close the dates snapshots were created, in case those snapshots becomes temporally or permanently inaccessible.</li> 
-     </ul>  
+    <li>Using <code>data-originalurl</code>: Visiting the resource after it was linked to.</li>
+    <li>Using <code>data-versionurl</code>: Visiting each snapshot of the resource that was created.</li>
+    <li>Leveraging datetime-oriented API affordances (e.g. <a href="https://datatracker.ietf.org/doc/rfc7089/">Memento</a>) provided by web archives and resource versioning systems:
+    <ul>
+    <li>Using <code>data-originalurl</code> and <code>data-versiondate</code>: Finding snapshots of the resource that are temporally close the 
+    intended linking date, in case no snapshots were created around the time of linking, 
+    or in case snapshots that were created become temporally or permanently inaccessible.</li>
+    <li>Using <code>data-originalurl</code> and <code>data-versionurl</code>: Finding snapshots of the resource that are temporally close the dates snapshots were created, 
+    in case those snapshots becomes temporally or permanently inaccessible.</li> 
+     </ul></li></ul>  
+
+        
   </div>
     </div></div>
         
     
         <div class="t100_2"><div class="style3">
-    <a id="data-attributes"><h2>2.1. Robust Links attributes</h2></a>
-        
-            Technically, the aforementioned information elements are provided as attributes for 
-            the HTML <code>anchor (&lt;a&gt;)</code> element using a combination of the existing <code>href</code> 
-            attribute and three extension attributes that leverage
-        <a href="https://html.spec.whatwg.org/#embedding-custom-non-visible-data-with-the-data-*-attributes">HTML5's attribute 
-        extensibility mechanism</a>: <code>data-versiondate</code>, <code>data-versionurl</code>, and <code>data-originalurl</code>. 
-                <br /><br />
-        The below table provides links to detailed information for each extension attribute, indicates whether attributes are optional or mandatory, 
-        and shows in which scenario(s) they are used, i.e. <a href="link-original">scenario 1</a> and/or <a href="link-memento">scenario 2</a>. 
-        <br /><br />
+    <a id="data-attributes"><h1>3. Robust Links attributes</h1></a>
+
+        This section enumerates the attributes used on a Robust Link, specifies their respective values, provides information for their use, 
+        and indicates the use requirement for each. 
+
         </div></div>
         
-        <div class=" ">
+
+             
+    
+        <div class="t100_2"><div class="style3">
+    <a id="href"><h2>3.1. <code>href</code></h2></a>
+        
+      Use of the <code>href</code> attribute is mandatory and its value is as detailed by the <a href="https://html.spec.whatwg.org/#links-created-by-a-and-area-elements">pertinent HTML specification</a>. 
+      <br /><br />
+      The URI provided in <code>href</code> on a Robust Link must identify the same resource as that of the URI provided in <code>data-originalurl</code> or 
+      of one of the URIs of snapshots provided in <code>data-versionurl</code>. Client applications that consume Robust Links should 
+      treat links for which this is not the case with suspicion. 
+      
+      </div></div>   
+      
+          <div class="t100_2"><div class="style3">
+    <a id="data-originalurl"><h2>3.2. <code>data-originalurl</code></h2></a>
+    Use of the <code>data-originalurl</code> attribute is recommended. Its value is the URI of the resource that motivates  
+    the provision of a Robust Link. The URI must be absolute, not relative.
+    <br /><br />
+    As shown in the <a href="#scenarios">scenarios</a>, the URI provided in <code>data-originalurl</code>
+    commonly, but not always, identifies the same resource as the URI provided for the <code>href</code> attribute. 
+    Therefor, in cases in which <code>data-originalurl</code> is not provided, applications that consume Robust Links may use 
+    (the absolute URI rendition of) the URI in <code>href</code> as the value for <code>data-originalurl</code>.
+     <br /><br />
+    <b>Example</b> <code>data-originalurl="https://www.w3.org/"</code>
+     </div></div>     
+        
+    <div class="t100_2"><div class="style3">
+    <a id="data-versiondate"><h2>3.3. <code>data-versiondate</code></h2></a>
+    Use of the <code>data-versiondate</code> attribute is recommended. Its value is the intended datetime of linking expressed in <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a>. 
+    The value can be provided at date or datetime granularity using a choice of two syntaxes: one aligned with <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO8601</a> and the other following 
+    a convention to express datetimes in URIs that is commonly used by web archives. Valid values are mnemonically shown in the table below.  
+    
+        <br /><br />
+    
+            <div class=" ">
 <table align="center">
 <tbody>
 <tr>
-<td style="width: 30%;" align="center"><b>attribute</b></td>
-<td style="width: 30%;" align="center"><b>requirement</b></td>
-<td style="width: 30%;" align="center"><b>scenario</b></td>
+<td style="width: 30%;" align="center"></td>
+<td style="width: 30%;" align="center"><b>date</b></td>
+<td style="width: 30%;" align="center"><b>datetime</b></td>
 </tr>
 <tr>
-<td align="center"><code>href</code></td>
-<td align="center">mandatory</td>
-<td align="center"><a href="link-original">scenario 1</a> ; <a href="link-memento">scenario 2</a></td>
+<td align="center"><b>ISO8601</b></td>
+<td align="center">YYYY-MM-DD</code></td>
+<td align="center">YYYY-MM-DDThh:mm:ssZ</td>
 </tr>
 <tr>
-<td align="center"><code><a href="#data-versiondate">data-versiondate</a></code></td>
-<td align="center">optional</td>
-<td align="center"><a href="link-original">scenario 1</a> ; <a href="link-memento">scenario 2</a></td>
-</tr>
-<tr>
-<td align="center"><code><a href="#data-versionurl">data-versionurl</a></code></td>
-<td align="center">optional</td>
-<td align="center"><a href="link-original">scenario 1</a></td>
-</tr>
-<tr>
-<td align="center"><code><a href="#data-originalurl">data-originalurl</a></code></td>
-<td align="center">optional</td>
-<td align="center"><a href="link-original"><a href="link-memento">scenario 2</a></td>
+<td align="center"><b>Web Archive URI</b></td>
+<td align="center">YYYYMMDD</code></td>
+<td align="center">YYYYMMDDhhmmss</td>
 </tr>
 </tbody>
 </table>
 </div> 
-        
-     <div class="t100_2" style="color:red;">
-    <br />
-    need to discuss: theoretically, data-versionurl could also be used in scenario 2 to convey URIs of snapshots other than the one provided in href. but doesn't that become a bit much?
-    </div>       
-        
-        
-    <div class="t100_2"><div class="style3">
-    <a id="data-versiondate"><h3>2.1.1. <code>data-versiondate</code></h3></a>
-    The attribute may be used in <a href="link-original">scenario 1</a> and <a href="link-mememento">scenario 2</a>. 
-    The attribute's content conveys the intended linking date (in <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a>) 
-    expressed in the form as defined by the <code>full-date</code> construct of the ABNF in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">Section 5.6 of RFC3339</a>, i.e. 
-    in the form <code>YYYY-MM-DD</code>.
+
     <br /><br />
-    <b>Example</b> <code>data-versiondate="2024-11-21"</code>
-    <div class="t100_2" style="color:red;">
-    <br />
-    need to discuss: is finer datetime granularity desired for data-versiondate and snapshot dates in data-versionurl ~ backwards compatibility
-    </div>
-    </div></div>
+    
+    Valid values for <code>data-versiondate</code> are defined by the below ABNF that reuses the following constructs from 
+    the ABNF in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">Section 5.6 of RFC3339</a>: 
+    <code>date-fullyear</code>, <code>date-month</code>, <code>date-mday</code>, <code>time-hour</code>, <code>time-minute</code>, <code>time-second</code>.
+    
+            <pre> <code>
+data-versiondate = versiondate 
+versiondate = (date , datetime) 
+date = (iso8601-date , web-archive-date)
+datetime = (iso8601-datetime , web-archive-datetime)
+iso8601-date = date-fullyear "-" date-month "-" date-mday
+web-archive-date = date-fullyear date-month date-mday
+iso8601-datetime = date-fullyear "-" date-month "-" date-mday "T" time-hour ":" time-minute ":" time-second "Z"
+web-archive-datetime = date-fullyear date-month date-mday time-hour time-minute time-second
+       </code> </pre>
+    
+    
+        A value provided for <code>data-versiondate</code> must be interpreted as noon <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a> of the 
+        indicated date, i.e. YYYY-MM-DD must be interpreted as YYYY-MM-DDT12:00:00Z and YYYYMMDD must be interpreted as YYYYMMDD120000. 
+        Datetime values must only be provided when the required granular information is available to the linker, i.e. it should not be 
+        artificially generated on the basis of a know date value.
+         
+    <br /><br />
+    <b>Examples</b> <code>data-versiondate="2024-11-21"</code> ; <code>data-versiondate="20241121"</code> ; <code>data-versiondate="20241121T162207Z" ; <code>data-versiondate="20241121162207"</code>
+   </div></div>
         
     <div class="t100_2"><div class="style3">
-    <a id="data-versionurl"><h3>2.1.2. <code>data-versionurl</code></h3></a>
-    The attribute may be used in <a href="link-original">scenario 1</a>.
-    The attribute's content is a list of one or more URIs of snapshots, whereby each snapshot URI may optionally be followed by that snapshot's date. 
-    URIs must be absolute, not relative. The provided information elements (URIs and dates) must be space-separated. 
-    This ABNF formalizes the syntax of the attribute's content:
+    <a id="data-versionurl"><h2>3.4. <code>data-versionurl</code></h2></a>
+    Use of the <code>data-versionurl</code> attribute is recommended. 
+    Its value is a list of one or more URIs of snapshots, whereby each snapshot URI may optionally be followed by that snapshot's datetime. 
+    URIs must be absolute, not relative. The provided information elements (URIs and datetimes) must be space-separated. 
+    This ABNF formalizes the syntax of the attribute's value:
         <pre> <code>
-data-versionurl = (URI *1(SP full-date)) *(SP URI *1(SP full-date))
+data-versionurl = (URI *1(SP versiondate)) *(SP URI *1(SP versiondate))
 URI = (http-URI , https-URI)
        </code> </pre>
     In this ABNF:
     <ul>
-    <li><code>full-date</code> is the construct of the ABNF in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">Section 5.6 of RFC3339</a> that  
-    represents a date (in <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a>) in the form <code>YYYY-MM-DD</code>.</li>
+    <li><code>versiondate</code> is the construct defined by the ABNF in the <a href="#data-versiondate"><code>data-versiondate</code> section</a>.</li>
     <li><code>http-URI</code> is the construct of the ABNF in <a href="https://httpwg.org/specs/rfc7230.html#http.uri">Section 2.7.1 of RFC7230</a> that represents an absolute HTTP URI with optional query and fragment components.</li>
      <li><code>https-URI</code> is the construct of the ABNF in <a href="https://httpwg.org/specs/rfc7230.html#https.uri">Section 2.7.2 of RFC7230</a> that represents an absolute HTTPS URI with optional query and fragment components.</li>
     </ul>
+    
+     A snapshot datetime provided in <code>data-versionurl</code> must be interpreted as noon <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a> of the 
+        indicated date, i.e. YYYY-MM-DD must be interpreted as YYYY-MM-DDT12:00:00Z and YYYYMMDD must be interpreted as YYYYMMDD120000. 
+        Datetime values must only be provided when the required granular information is available to the linker, i.e. it should not be 
+        artificially generated on the basis of a know date value.
 
+    <br /><br />
 
-    <b>Example</b> <code>data-versionurl="https://web.archive.org/web/20241121100333/https://www.w3.org/ https://perma.cc/44TF-9JXB 2024-11-20"</code>
-    <div class="t100_2" style="color:red;">
-    <br />
-    need to discuss: format of data-versionurl. the idea was for it to be inspired by srcset. but srcset consists of comma-delimited pairs see <a href="https://html.spec.whatwg.org/#attributes-common-to-source-and-img-elements">https://html.spec.whatwg.org/#attributes-common-to-source-and-img-elements</a>
-        <br />    <br />
-        need to discuss: can this be restricted to http(s) or does it need to be URIs in general?
-     </div>
+    <b>Example</b> <code>data-versionurl="https://web.archive.org/web/20241121100333/https://www.w3.org/ https://perma.cc/44TF-9JXB 20241120164333"</code>
     </div></div>
     
-    <div class="t100_2"><div class="style3">
-    <a id="data-originalurl"><h3>2.1.3. <code>data-originalurl</code></h3></a>
-     The attribute may be used in <a href="link-mememento">scenario 2</a>. 
-    The attribute's content is the URI of the linked resource. The URI must be absolute, not relative.
-     <br /><br />
-    <b>Example</b> <code>data-originalurl="https://www.w3.org/"</code>
-     </div></div>
+
         
+            <div class="t100_2"><div class="style3">
+    <a id="scenarios"><h1>3. Scenarios</h1></a>
   
     <div class="t100_2"><div class="style3">
-    <a id="link-original"><h2>2.2. Scenario 1: The URI of the web resource is provided in <code>href</code></h2></a>
+    <a id="link-original"><h2>3.1. Scenario 1: The URI of the web resource is provided in <code>href</code></h2></a>
    If the main intent is to link to a resource but to also allow future users of the link  
    to see the state of the linked resource around the date that was intended by the linker, the
    attributes on the link are used as follows:
@@ -437,7 +486,7 @@ The <a href="http://www.w3.org/" data-versiondate="2024-11-20">Robust Link to th
   
   
     <div class="t100_2"><div class="style3">
-    <a id="link-memento"><h2>2.3. Scenario 2: The URI of a snapshot of the web resource is provided in <code>href</code></h2></a>
+    <a id="link-memento"><h2>3.2. Scenario 2: The URI of a snapshot of the web resource is provided in <code>href</code></h2></a>
     If the main intent is to link to a specific state of a web resource, for example a snapshot 
     of the resource in a web archive or one of its version in a version control system, the
     attributes on the link are used as follows:
@@ -492,13 +541,7 @@ The <a href="http://www.w3.org/" data-versiondate="2024-11-20">Robust Link to th
 
     </div></div>
   
-    <div class="t100_2"><div class="style3">
-    <a id="motivation"><h1>3. Detailed motivation</h1></a>
-    <div class="t100_2" style="color:red;">
-    <br />
-    Proposal: a version of <a href="https://robustlinks.mementoweb.org/about/">Robust Links - Motivation</a> goes here
-     </div>
-    </div></div>
+
 
 
 
