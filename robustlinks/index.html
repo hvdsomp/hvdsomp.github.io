@@ -218,7 +218,7 @@ ol.nested-counter-list ol {
     <a id="referencing"><h2>Abstract</h2></a>
     A Robust Link offers multiple pathways to revisit the content of a linked resource, even
     a long time after the link to the resource was put in place. It combats link rot and content drift, problems that are prevalent with links on the Web.
-    This document describes how to robustify links in HTML pages. It recommends creating one or more snapshots of a resource 
+    This document describes how to provide Robust Links in HTML pages. It recommends creating one or more snapshots of a resource 
     around the time of linking to it, for example, in a web archive or a versioning system. And it recommends creating a Robust Link 
     by conveying the following information as attributes on the link to a resource: 
     the URI of the resource, the intended linking datetime, and the URIs of one or more snapshots of the linked resource as well as their respective 
@@ -232,8 +232,8 @@ ol.nested-counter-list ol {
 
 <div class=" ">
 <ol class="nested-counter-list">
-<li><a href="#intro">Why robustify links?</a></li>
-<li><a href="#robust-links">How to robustify links?</a>
+<li><a href="#intro">Why provide Robust Links?</a></li>
+<li><a href="#robust-links">How to provide Robust Links?</a>
 <li><a href="#data-attributes">Robust Links attributes</a></li>
   <ol>
   <li><a href="#href"><code>href</code></a></li>
@@ -254,16 +254,16 @@ ol.nested-counter-list ol {
 
   
     <div class="t100_2"><div class="style3">
-    <a id="intro"><h1>1. Why robustify links?</h1></a>
-    Robust Links are intended to provide multiple pathways to revisit the content of a linked resource as it existed around the time the resource was linked to. 
+    <a id="intro"><h1>1. Why provide Robust Links?</h1></a>
+    The provision of a Robust Link for a resource is motivated by the desire to offer multiple pathways to revisit the content of that resource as it existed around the time it was linked. 
     This can be important because it is well known that, as time goes by, the content of any web resource changes (content drift) 
     or the resource vanishes altogether (link rot; 404 Not Found).
   <br /><br />
   Robust Links combat link rot and content drift by annotating a link to a resource with information that supports revisiting 
   various states of the linked resource. 
-  In the below example, the URI of a resource is provided in <code>data-originalurl</code>, 
-                   the URI of a snapshot of the linked resource that was created around the time of linking is provided in <code>data-versionurl</code>,
-                   and the linking date is provided in <code>data-versiondate</code>:
+  In the below example, the URI of the resource that motivates the provision of a Robust Link is conveyed as the value of <code>data-originalurl</code>, 
+                   the URI of a snapshot of that resource created around the time of linking is provided as the value of <code>data-versionurl</code>,
+                   and the linking date is the value of <code>data-versiondate</code>:
   <pre>&lt;a href="https://www.w3.org/"
    data-originalurl="https://www.w3.org/"
    data-versiondate="2024-11-21" 
@@ -278,9 +278,10 @@ As shown in the <a href="#scenarios">scenarios</a>, depending on the motivation 
     </div></div>
   
     <div class="t100_2"><div class="style3">
-    <a id="robust-links"><h1>2. How to robustify links?</h1></a>
+    <a id="robust-links"><h1>2. How to provide Robust Links?</h1></a>
     
-    As is the case with any link in HTML, the default link target is provided by the <code>href</code> attribute. But a link to a resource can be robustified by including three <a href="https://html.spec.whatwg.org/#embedding-custom-non-visible-data-with-the-data-*-attributes">extension attributes</a> for 
+    As is the case with any link in HTML, the default link target is provided by the <code>href</code> attribute. But a link to a resource can be turned into a Robust Link 
+    by including three <a href="https://html.spec.whatwg.org/#embedding-custom-non-visible-data-with-the-data-*-attributes">extension attributes</a> for 
             the HTML <code>anchor (&lt;a&gt;)</code> element: <code>data-originalurl</code>, <code>data-versiondate</code>, and <code>data-versionurl</code>. 
        Use of each attribute is recommended and their value is as follows:
                 <br />
@@ -335,7 +336,7 @@ As shown in the <a href="#scenarios">scenarios</a>, depending on the motivation 
         
       Use of the <code>href</code> attribute is mandatory and its value is as detailed by the <a href="https://html.spec.whatwg.org/#links-created-by-a-and-area-elements">pertinent HTML specification</a>. 
       <br /><br />
-      The URI provided in <code>href</code> on a Robust Link must identify the same resource as that of the URI provided in <code>data-originalurl</code> or 
+      The URI provided as the value of <code>href</code> on a Robust Link must identify the same resource as that of the URI provided in <code>data-originalurl</code> or as 
       of one of the URIs of snapshots provided in <code>data-versionurl</code>. Client applications that consume Robust Links should 
       treat links for which this is not the case with suspicion. 
       
@@ -414,7 +415,7 @@ web-archive-datetime = date-fullyear date-month date-mday time-hour time-minute 
     <div class="t100_2"><div class="style3">
     <a id="data-versionurl"><h2>3.4. <code>data-versionurl</code></h2></a>
     Use of the <code>data-versionurl</code> attribute is recommended. 
-    Its value is a list of one or more URIs of snapshots, whereby each snapshot URI may optionally be followed by that snapshot's datetime. 
+    Its value is a list of one or more URIs of snapshots of the resource that motivates the provision of a Robust Link (see <a href="#data-originalurl"><code>data-originalurl</code></a>), whereby each snapshot URI may optionally be followed by that snapshot's datetime. 
     URIs must be absolute, not relative. The provided information elements (URIs and datetimes) must be space-separated. 
     This ABNF formalizes the syntax of the attribute's value:
         <pre> <code>
