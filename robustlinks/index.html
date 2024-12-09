@@ -9,7 +9,7 @@
   <meta property="og:url" content="https://robustlinks.mementoweb.org/spec/">
   <meta property="og:site_name" content="Robust Links">
   <meta property="og:locale" content="en_US">
-  <meta property="og:description" content="Robust Links provide multiple pathways to revisit the original content of a link. This document describes approaches to robustify links in HTML pages.">
+  <meta property="og:description" content="Robust Links provide multiple pathways to revisit the original content of a link. This document describes approaches to provide Robust Links in HTML pages.">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:site" content="@Mementoweb">
   <meta name="twitter:image:src" content="https://mementoweb.org/static/css/images/robustlinks.png">
@@ -18,7 +18,7 @@
   <meta name="twitter:title" content="Robustifying Links">
   <meta name="twitter:description" content="Robust Links provide multiple pathways to revisit the original content of a link. This document describes approaches to robustify links in HTML pages.">
 
-  <meta itemprop="dateModified" content="2024-11-26">
+  <meta itemprop="dateModified" content="2024-12-09">
   <meta itemprop="datePublished" content="2015-01-23">
   <title>Robust Links</title>
   
@@ -155,7 +155,7 @@ ol.nested-counter-list ol {
     EXPERIMENTAL DRAFT REVISION OF <a href="https://robustlinks.mementoweb.org/spec/">https://robustlinks.mementoweb.org/spec/</a>
   </div>
   <br />
-         Last updated: December 5, 2024
+         Last updated: December 9, 2024
         </div>
 
 
@@ -218,7 +218,7 @@ ol.nested-counter-list ol {
     <a id="referencing"><h2>Abstract</h2></a>
     A Robust Link offers multiple pathways to revisit the content of a linked resource, even
     a long time after the link to the resource was put in place. It combats link rot and content drift, problems that are prevalent with links on the Web.
-    This document describes how to robustify links in HTML pages. It recommends creating one or more snapshots of a resource 
+    This document describes how to provide Robust Links in HTML pages. It recommends creating one or more snapshots of a resource 
     around the time of linking to it, for example, in a web archive or a versioning system. And it recommends creating a Robust Link 
     by conveying the following information as attributes on the link to a resource: 
     the URI of the resource, the intended linking datetime, and the URIs of one or more snapshots of the linked resource as well as their respective 
@@ -232,8 +232,8 @@ ol.nested-counter-list ol {
 
 <div class=" ">
 <ol class="nested-counter-list">
-<li><a href="#intro">Why robustify links?</a></li>
-<li><a href="#robust-links">How to robustify links?</a>
+<li><a href="#intro">Why provide Robust Links?</a></li>
+<li><a href="#robust-links">How to provide Robust Links?</a>
 <li><a href="#data-attributes">Robust Links attributes</a></li>
   <ol>
   <li><a href="#href"><code>href</code></a></li>
@@ -243,8 +243,13 @@ ol.nested-counter-list ol {
   </ol>
 <li><a href="#scenarios">Scenarios</a></li>
   <ol>
-  <li><a href="#link-original">Scenario 1: The URI of the web resource is provided in <code>href</code></a></li>
-  <li><a href="#link-memento">Scenario 2: The URI of a snapshot of the web resource is provided in <code>href</code></a></li>
+  <li><a href="#scenario-1">Scenario 1: Linking to a live web resource</a></li>
+  <li><a href="#scenario-2">Scenario 2: Linking to a snapshot of a web resource</a>
+      <ol>
+      <li><a href="#scenario-2-1">A live web resource motivates the provision of the Robust Link</a></li>
+      <li><a href="#scenario-2-2">A snapshot of a live web resource motivates the provision of the Robust Link</a></li>
+      </ol>
+  </li>
   </ol>
 </ol>
 </div>  
@@ -254,16 +259,16 @@ ol.nested-counter-list ol {
 
   
     <div class="t100_2"><div class="style3">
-    <a id="intro"><h1>1. Why robustify links?</h1></a>
-    Robust Links are intended to provide multiple pathways to revisit the content of a linked resource as it existed around the time the resource was linked to. 
+    <a id="intro"><h1>1. Why provide Robust Links?</h1></a>
+    The provision of a Robust Link for a resource is motivated by the desire to offer multiple pathways to revisit the content of that resource as it existed around the time it was linked. 
     This can be important because it is well known that, as time goes by, the content of any web resource changes (content drift) 
     or the resource vanishes altogether (link rot; 404 Not Found).
   <br /><br />
   Robust Links combat link rot and content drift by annotating a link to a resource with information that supports revisiting 
   various states of the linked resource. 
-  In the below example, the URI of a resource is provided in <code>data-originalurl</code>, 
-                   the URI of a snapshot of the linked resource that was created around the time of linking is provided in <code>data-versionurl</code>,
-                   and the linking date is provided in <code>data-versiondate</code>:
+  In the below example, the URI of the resource that motivates the provision of a Robust Link is conveyed as the value of <code>data-originalurl</code>, 
+                   the URI of a snapshot of that resource created around the time of linking is provided as the value of <code>data-versionurl</code>,
+                   and the linking date is the value of <code>data-versiondate</code>:
   <pre>&lt;a href="https://www.w3.org/"
    data-originalurl="https://www.w3.org/"
    data-versiondate="2024-11-21" 
@@ -278,10 +283,11 @@ As shown in the <a href="#scenarios">scenarios</a>, depending on the motivation 
     </div></div>
   
     <div class="t100_2"><div class="style3">
-    <a id="robust-links"><h1>2. How to robustify links?</h1></a>
+    <a id="robust-links"><h1>2. How to provide Robust Links?</h1></a>
     
-    As is the case with any link in HTML, the default link target is provided by the <code>href</code> attribute. But a link to a resource can be robustified by including three <a href="https://html.spec.whatwg.org/#embedding-custom-non-visible-data-with-the-data-*-attributes">extension attributes</a> for 
-            the HTML <code>anchor (&lt;a&gt;)</code> element: <code>data-originalurl</code>, <code>data-versiondate</code>, and <code>data-versionurl</code>. 
+    As is the case with any link in HTML, the default link target is provided by the <code>href</code> attribute for the HTML <code>anchor (&lt;a&gt;)</code> element. But a link to a resource can be turned into a Robust Link 
+    by including three <a href="https://html.spec.whatwg.org/#embedding-custom-non-visible-data-with-the-data-*-attributes">extension attributes</a> for 
+            that element: <code>data-originalurl</code>, <code>data-versiondate</code>, and <code>data-versionurl</code>. 
        Use of each attribute is recommended and their value is as follows:
                 <br />
 
@@ -300,7 +306,7 @@ As shown in the <a href="#scenarios">scenarios</a>, depending on the motivation 
     </ul>
     </ul>   
 
-      When the <code>data-*</code> attributes are provided in a machine-actionable manner, as detailed in the below sub-sections, 
+      When these <code>data-*</code> attributes are provided in a machine-actionable manner, as detailed in the <a href="#data-attributes">Robust Links attributes</a> section, 
       client applications can be devised that support several pathways to visit a linked resource:
     <ul>
     <li>Using <code>data-originalurl</code>: Visiting the resource after it was linked to.</li>
@@ -335,7 +341,7 @@ As shown in the <a href="#scenarios">scenarios</a>, depending on the motivation 
         
       Use of the <code>href</code> attribute is mandatory and its value is as detailed by the <a href="https://html.spec.whatwg.org/#links-created-by-a-and-area-elements">pertinent HTML specification</a>. 
       <br /><br />
-      The URI provided in <code>href</code> on a Robust Link must identify the same resource as that of the URI provided in <code>data-originalurl</code> or 
+      The URI provided as the value of <code>href</code> on a Robust Link must identify the same resource as that of the URI provided in <code>data-originalurl</code> or as 
       of one of the URIs of snapshots provided in <code>data-versionurl</code>. Client applications that consume Robust Links should 
       treat links for which this is not the case with suspicion. 
       
@@ -414,7 +420,7 @@ web-archive-datetime = date-fullyear date-month date-mday time-hour time-minute 
     <div class="t100_2"><div class="style3">
     <a id="data-versionurl"><h2>3.4. <code>data-versionurl</code></h2></a>
     Use of the <code>data-versionurl</code> attribute is recommended. 
-    Its value is a list of one or more URIs of snapshots, whereby each snapshot URI may optionally be followed by that snapshot's datetime. 
+    Its value is a list of one or more URIs of snapshots of the resource that motivates the provision of a Robust Link (see <a href="#data-originalurl"><code>data-originalurl</code></a>), whereby each snapshot URI may optionally be followed by that snapshot's datetime. 
     URIs must be absolute, not relative. The provided information elements (URIs and datetimes) must be space-separated. 
     This ABNF formalizes the syntax of the attribute's value:
         <pre> <code>
@@ -442,41 +448,64 @@ URI = (http-URI , https-URI)
         
             <div class="t100_2"><div class="style3">
     <a id="scenarios"><h1>3. Scenarios</h1></a>
-      <div class="t100_2" style="color:red;">
-      Not updated yet
-    <br />
-    </div>
+     This section provides examples for two scenarios that differ with regard to the nature of the link target:  
+     in <a href="#scenario-1">Scenario 1</a>, the default link target (URI in <code>href</code>) is a live web resource, 
+     whereas in <a href="#scenario-2">Scenario 2</a> it is a snapshot of a web resource. 
+    
+    <!-- 
+href	original-url	version-url		version-date time
+
+Focus on URI-R, pathways to Mementos of URI-R:
+
+URI-R	URI-R		1*URI-Mi(URI-R)		date-linking
+
+Focus on Memento URI-M1(URI-R), pathways to other Mementos of URI-R:
+
+URI-M1	URI-R		1*URI-Mi(URI-R)		date-linking
+
+Focus on a Memento URI-M1(URI-R), pathways to Mementos of Memento URI-M1(URI-R)
+
+URI-M1	URI-M1		1*URI-Mi(URI-M1)	date-linking
+
+FALSE : 
+
+URI-R	URI-M1		1*URI-Mi(URI-M1)	date-linking
+    -->
   
     <div class="t100_2"><div class="style3">
-    <a id="link-original"><h2>3.1. Scenario 1: The URI of the web resource is provided in <code>href</code></h2></a>
-   If the main intent is to link to a resource but to also allow future users of the link  
-   to see the state of the linked resource around the date that was intended by the linker, the
-   attributes on the link are used as follows:
+    <a id="scenario-1"><h2>3.1. Scenario 1: Linking to a live web resource</h2></a>
+    
+   In a common case, the main intent is to link to a live web resource and to also allow future users of the link  
+   to see the state of the linked resource around the date that was intended by the linker. In this case, the
+   values for the attributes on the link are as follows:
     <ul>
-    <li><code>href</code>: conveys the URI of the linked resource.</li>
-    <li><code>data-versiondate</code>: conveys the intended date of linking.</li>
-    <li><code>data-versionurl</code>: conveys the URIs of the snapshots and optionally their respective dates, provided as a list as described <a href="#data-versionurl">above</a>.</li>
-    <li><code>data-originalurl</code>: not used.</li>
+    <li><code>href</code>: the URI of the live web resource.</li>
+    <li><code>data-originalurl</code>: the URI of the live web resource.</li>
+    <li><code>data-versiondate</code>: the intended date of linking.</li>
+    <li><code>data-versionurl</code>: the URI of one or more snapshots of the live web resource 
+    and optionally the respective snapshot dates, provided as a list as described <a href="#data-versionurl">above</a>.</li>
+
     </ul>
     <b>Example</b> Assume creating a Robust Link to <code>https://www.w3.org/</code> on November 20th 2024. On that day, 
     a snapshot of the resource is created in perma.cc. 
-    Its URI is <a href="https://perma.cc/44TF-9JXB"><code>https://perma.cc/44TF-9JXB</code></a> and its snapshot date is <code>2024-11-20</code>. 
+    Its URI is <a href="https://perma.cc/44TF-9JXB"><code>https://perma.cc/44TF-9JXB</code></a> and the snapshot datetime provided by perma.cc is <code>2024-11-20T16:43:33Z</code>. 
     The next day, an additional snapshot is created in the Internet Archive. 
     Its URI is <a href="https://web.archive.org/web/20241121100333/https://www.w3.org/"><code>https://web.archive.org/web/20241121100333/https://www.w3.org/</code></a> 
     and its snapshot date is <code>2024-11-21</code>. 
-    The resulting <a href="https://www.w3.org/" data-versionurl="https://perma.cc/44TF-9JXB https://web.archive.org/web/20241121100333/https://www.w3.org/ 2024-11-21" data-versiondate="2024-11-20">Robust Link to the W3C home page</a> looks like this:
+    A <a href="https://www.w3.org/" data-originalurl="https://www.w3.org/" data-versiondate="2024-11-20" data-versionurl="https://perma.cc/44TF-9JXB 2024-11-20T16:43:33Z https://web.archive.org/web/20241121100333/https://www.w3.org/">Robust Link to the W3C home page</a> 
+    can look like this:
 <pre>&lt;a href="https://www.w3.org/"
-   data-versionurl="https://perma.cc/44TF-9JXB https://web.archive.org/web/20241121100333/https://www.w3.org/ 2024-11-21"
-   data-versiondate="2024-11-20"&gt;
+   data-originalurl="https://www.w3.org/"
+   data-versiondate="2024-11-20"
+   data-versionurl="https://perma.cc/44TF-9JXB 2024-11-20T16:43:33Z https://web.archive.org/web/20241121100333/https://www.w3.org/"&gt;
    Robust Link to the W3C home page
 &lt;/a&gt;
 </pre>
-As can be seen, the date of the first snapshot is not provided, in this case because it is redundant with the intended linking date provided in <code>data-versiondate</code>.
-<br />
-<br />
-<b>Example</b> Assume creating a Robust Link to <code>https://www.w3.org/</code> on November 20th 2024 but without creating any snapshots of the linked resource. 
-The <a href="http://www.w3.org/" data-versiondate="2024-11-20">Robust Link to the W3C home page</a> would look like this:
+
+<b>Example</b> Assume creating a Robust Link to <code>https://www.w3.org/</code> on November 20th 2024, without creating any snapshots of the linked resource. 
+The <a href="http://www.w3.org/" data-originalurl="https://www.w3.org/" data-versiondate="2024-11-20">Robust Link to the W3C home page</a> looks like this:
 <pre>&lt;a href="https://www.w3.org/"
+   data-originalurl="https://www.w3.org/"
    data-versiondate="2024-11-20"&gt;
    Robust Link to the W3C home page
 &lt;/a&gt;
@@ -485,37 +514,46 @@ The <a href="http://www.w3.org/" data-versiondate="2024-11-20">Robust Link to th
 </ul>
     </div></div>
   
-
-  
-  
-  
     <div class="t100_2"><div class="style3">
-    <a id="link-memento"><h2>3.2. Scenario 2: The URI of a snapshot of the web resource is provided in <code>href</code></h2></a>
-    If the main intent is to link to a specific state of a web resource, for example a snapshot 
-    of the resource in a web archive or one of its version in a version control system, the
-    attributes on the link are used as follows:
+    <a id="scenario-2"><h2>3.2. Scenario 2: Linking to a snapshot of a web resource</h2></a>
+    </div></div>
+     
+     <div class="t100_2"><div class="style3">
+     <a id="scenario-2-1"><h3>3.2.1. A live web resource motivates the provision of the Robust Link</h3></a>
+    
+    Sometimes a live web resource motivates the provision of a Robust Link yet the intent is for the default link 
+    to target a specific version thereof, for example a snapshot 
+    of the resource in a web archive or one of its version in a version control system. In this case, the
+   values for the attributes on the link are as follows:
     <ul>
-    <li><code>href</code>: conveys the URI of the snapshot/version that captures the desired state of the resource.</li>
-    <li><code>data-versiondate</code>: conveys the intended date of linking.</li>
-    <li><code>data-versionurl</code>: not used.</li>
-    <li><code>data-originalurl</code>: conveys the URI of the web resource for which the URI of a snapshot/version is provided in <code>href</code>.</li>
+    <li><code>href</code>: the URI of the snapshot/version that captures the desired state of the resource.</li>
+    <li><code>data-originalurl</code>: the URI of the web resource for which the URI of a snapshot/version is provided in <code>href</code>.</li>
+    <li><code>data-versiondate</code>: the intended date of linking.</li>
+    <li><code>data-versionurl</code>: the URI of one or more snapshots of the live web resource other than the one 
+    provided in <code>href</code> and optionally the respective snapshot dates, 
+    provided as a list as described <a href="#data-versionurl">above</a>.</li>
+
     </ul>
     
     <b>Example</b> Assume creating a Robust Link on November 21st 2024 that is primarily intended to convey the state of 
-    <code>https://www.w3.org/</code> on that day. In order to do so, the snapshot <code>https://web.archive.org/web/20241121100333/https://www.w3.org/</code> 
-    is created and its URI is conveyed in the <code>href</code> attribute on the link. The 
-        <a href="https://web.archive.org/web/20241121100333/https://www.w3.org/" data-originalurl="https://www.w3.org/" data-versiondate="2024-11-21">
+    <code>https://www.w3.org/</code> on that day. In order to do so, the snapshot <a href="https://web.archive.org/web/20241121100333/https://www.w3.org/"><code>https://web.archive.org/web/20241121100333/https://www.w3.org/</code></a>
+    is created and its URI is conveyed in the <code>href</code> attribute on the link. On November 20th 2024 another snapshot has been created in perma.cc and its URI is 
+    <a href="https://perma.cc/44TF-9JXB"><code>https://perma.cc/44TF-9JXB</code></a> and its snapshot datetime is <code>2024-11-20T16:43:33Z</code>.
+    
+    A 
+        <a href="https://web.archive.org/web/20241121100333/https://www.w3.org/" data-originalurl="https://www.w3.org/" data-versiondate="2024-11-21" data-versionurl="https://perma.cc/44TF-9JXB 2024-11-20T16:43:33Z">
         Robust Link to the November 21st 2024 version of the W3C home page</a> looks like this:
 <pre>&lt;a href="https://web.archive.org/web/20241121100333/https://www.w3.org/"
    data-originalurl="https://www.w3.org/"
-   data-versiondate="2024-11-21"&gt;
+   data-versiondate="2024-11-21"
+   data-versionurl="https://perma.cc/44TF-9JXB 2024-11-20T16:43:33Z"&gt;
    Robust Link to the November 21st 2024 version of the W3C home page
 &lt;/a&gt;
 </pre>
 
    <b>Example</b> Assume creating a Robust Link on November 22nd 2024 that is primarily intended to point to the version of 
-    <code>https://en.wikipedia.org/wiki/Web_archiving</code> that is current on that day, which is 
-     <code>https://en.wikipedia.org/w/index.php?title=Web_archiving&oldid=1258145565</code>. 
+    <a href="https://en.wikipedia.org/wiki/Web_archiving"><code>https://en.wikipedia.org/wiki/Web_archiving</code></a> that is current on that day, which is 
+     <a href="https://en.wikipedia.org/w/index.php?title=Web_archiving&oldid=1258145565"><code>https://en.wikipedia.org/w/index.php?title=Web_archiving&oldid=1258145565</code></a>. 
     In this case, the  
         <a href="https://en.wikipedia.org/w/index.php?title=Web_archiving&oldid=1258145565" data-originalurl="https://en.wikipedia.org/wiki/Web_archiving" data-versiondate="2024-11-22">
         Robust Link to the version of the Wikipedia page about Web Archiving that was current on November 22nd 2024</a> looks like this:
@@ -527,8 +565,9 @@ The <a href="http://www.w3.org/" data-versiondate="2024-11-20">Robust Link to th
 </pre>
 
    <b>Example</b> Assume creating a Robust Link on November 22nd 2024 that is primarily intended to point to the version of 
-    <code>https://en.wikipedia.org/wiki/Web_archiving</code> that was current on April 10th 2012, which is 
-     <code>https://en.wikipedia.org/w/index.php?title=Web_archiving&oldid=485347845</code>. 
+    <a href="https://en.wikipedia.org/wiki/Web_archiving"><code>https://en.wikipedia.org/wiki/Web_archiving</code></a> 
+    that was current on April 10th 2012, which is 
+     <a href="https://en.wikipedia.org/w/index.php?title=Web_archiving&oldid=485347845"><code>https://en.wikipedia.org/w/index.php?title=Web_archiving&oldid=485347845</code></a>. 
     In this case, the  
         <a href="https://en.wikipedia.org/w/index.php?title=Web_archiving&oldid=485347845" 
         data-originalurl="https://en.wikipedia.org/wiki/Web_archiving" 
@@ -541,14 +580,45 @@ The <a href="http://www.w3.org/" data-versiondate="2024-11-20">Robust Link to th
 &lt;/a&gt;
 </pre>
 
-
-
     </div></div>
-  
 
-
-
-
+     <div class="t100_2"><div class="style3">
+     <a id="scenario-2-2"><h3>3.2.2. A snapshot of a live web resource motivates the provision of the Robust Link</h3></a>
+     
+For completeness, the Robust Links approach can be further illustrated by means of a scenario that might be appealing to frequent users of web archives. 
+In this scenario, a snapshot of a web resource motivates the provision of a Robust Link and, for example, in order to prove that a specific snapshot/version existed, 
+a snapshot of that snapshot is created in a system other than the one that hosts the original snapshot. In this case, which essentially is the 
+same as <a href="#scenario-1">Scenario 1</a> but applied to a snapshot instead of a live web resource, values for the attributes on the link are as follows:
+    <ul>
+    <li><code>href</code>: the URI of the snapshot/version that captures the desired state of the resource.</li>
+    <li><code>data-originalurl</code>: the URI of the snapshot/version that captures the desired state of the resource.</li>
+    <li><code>data-versiondate</code>: the intended date of linking.</li>
+    <li><code>data-versionurl</code>: the URI of one or more snapshots of the snapshot/version  
+    provided in <code>href</code> and <code>data-originalurl</code>, and optionally the respective snapshot dates, 
+    provided as a list as described <a href="#data-versionurl">above</a>.</li>
+    </div></div>
+    
+       <b>Example</b> Assume creating a Robust Link on December 9th 2024 that is intended to illustrate that the November 21st 2024 snapshot 
+    of the W3C home page <a href="https://web.archive.org/web/20241121100333/https://www.w3.org/"><code>https://web.archive.org/web/20241121100333/https://www.w3.org/</code></a>  
+    existed on that day in the <a href="https://web.archive.org">Internet Archive</a>. 
+    In order to do so, a snapshot of the snapshot is created in <a href="https://archive.today">archive.today</a>. 
+    It's URI is <a href="https://archive.ph/T9xD2"><code>https://archive.ph/T9xD2</code></a>. Although the snapshot is created on December 9th, 
+    <a href="https://archive.today">archive.today</a> recognizes it as being a snapshot of a snapshot and maintains the snapshot datetime of the 
+    original snapshot, i.e. <code>20241121T10:03:33Z</code>.  In this case, the  
+        <a href="https://web.archive.org/web/20241121100333/https://www.w3.org/" 
+        data-originalurl="https://web.archive.org/web/20241121100333/https://www.w3.org/" 
+        data-versiondate="2024-12-09"
+        data-versionurl="https://archive.ph/T9xD2 20241121T10:03:33Z">
+        Robust Link to prove the November 21st 2024 snapshot of the W3C page existed in the Internet Archive on December 9th 2024</a> looks like this:
+<pre>&lt;a href="https://web.archive.org/web/20241121100333/https://www.w3.org/"
+   data-originalurl="https://web.archive.org/web/20241121100333/https://www.w3.org/"
+   data-versiondate="2024-12-09"
+   data-versionurl="https://archive.ph/T9xD2 20241121T10:03:33Z"&gt;
+   Robust Link to prove the November 21st 2024 snapshot of the W3C page existed in the Internet Archive on December 9th 2024
+&lt;/a&gt;
+</pre>
+    
+    
     <br><br>
 
 <div id="menu_bottom" style="background: #eee; height: 60px; bottom: 0; position: relative; width: 980px; margin: 0;">
