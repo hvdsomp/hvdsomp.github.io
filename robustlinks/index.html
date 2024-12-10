@@ -218,7 +218,7 @@ ol.nested-counter-list ol {
     <a id="referencing"><h2>Abstract</h2></a>
     A Robust Link offers multiple pathways to revisit the content of a linked resource, even
     a long time after the link to the resource was put in place. It combats link rot and content drift, problems that are prevalent with links on the Web.
-    This document describes how to provide Robust Links in HTML pages. It recommends creating one or more snapshots of a resource 
+    This document describes how to provide Robust Links in HTML. It recommends creating one or more snapshots of a resource 
     around the time of linking to it, for example, in a web archive or a versioning system. And it recommends creating a Robust Link 
     by conveying the following information as attributes on the link to a resource: 
     the URI of the resource, the intended linking datetime, and the URIs of one or more snapshots of the linked resource as well as their respective 
@@ -285,14 +285,17 @@ As shown in the <a href="#scenarios">scenarios</a>, depending on the motivation 
     <div class="t100_2"><div class="style3">
     <a id="robust-links"><h1>2. How to provide Robust Links?</h1></a>
     
-    As is the case with any link in HTML, the default link target is provided by the <code>href</code> attribute for the HTML <code>anchor (&lt;a&gt;)</code> element. But a link to a resource can be turned into a Robust Link 
+    As is the case with any link in HTML, the default link target is provided by the <code>href</code> attribute for the HTML <code>anchor (&lt;a&gt;)</code> element. 
+   But a link to a resource can be turned into a Robust Link 
     by including three <a href="https://html.spec.whatwg.org/#embedding-custom-non-visible-data-with-the-data-*-attributes">extension attributes</a> for 
             that element: <code>data-originalurl</code>, <code>data-versiondate</code>, and <code>data-versionurl</code>. 
        Use of each attribute is recommended and their value is as follows:
                 <br />
 
     <ul>
-    <li><code>data-originalurl</code>: The <b>URI of the resource</b> that motivates the provision of a Robust Link.</li>
+    <li><code>data-originalurl</code>: The <b>URI of the resource</b> that motivates the provision of a Robust Link. 
+    In common cases, the default target resource (in <code>href</code>) is also the resource that provides the motivation to provide a Robust Link. 
+    But, as illustrated by the <a href="#scenarios">Scenarios</a>, this is not always the case.</li>
     <li><code>data-versiondate</code>: The intended <b>date of linking to the resource</b>, 
          i.e. the date of the state of the resource that the linker wants the link visitor to be able to experience.</li>
     <li><code>data-versionurl</code>: The <b>URI of one or more snapshots of the resource</b>, 
@@ -319,6 +322,8 @@ As shown in the <a href="#scenarios">scenarios</a>, depending on the motivation 
     <li>Using <code>data-originalurl</code> and <code>data-versionurl</code>: Finding snapshots of the resource that are temporally close the dates snapshots were created, 
     in case those snapshots becomes temporally or permanently inaccessible.</li> 
      </ul></li></ul>  
+     
+    
 
         
   </div>
