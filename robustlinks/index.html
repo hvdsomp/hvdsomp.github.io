@@ -18,7 +18,7 @@
   <meta name="twitter:title" content="Robustifying Links">
   <meta name="twitter:description" content="Robust Links provide multiple pathways to revisit the original content of a link. This document describes approaches to robustify links in HTML pages.">
 
-  <meta itemprop="dateModified" content="2024-12-10">
+  <meta itemprop="dateModified" content="2024-12-12">
   <meta itemprop="datePublished" content="2015-01-23">
   <title>Robust Links</title>
   
@@ -155,7 +155,7 @@ ol.nested-counter-list ol {
     EXPERIMENTAL DRAFT REVISION OF <a href="https://robustlinks.mementoweb.org/spec/">https://robustlinks.mementoweb.org/spec/</a>
   </div>
   <br />
-         Last updated: December 10, 2024
+         Last updated: December 12, 2024
         </div>
 
 
@@ -345,10 +345,7 @@ As shown in the <a href="#scenarios">scenarios</a>, depending on the motivation 
     <a id="href"><h2>3.1. <code>href</code></h2></a>
         
       Use of the <code>href</code> attribute is mandatory and its value is as detailed by the <a href="https://html.spec.whatwg.org/#links-created-by-a-and-area-elements">pertinent HTML specification</a>. 
-      <br /><br />
-      The URI provided as the value of <code>href</code> on a Robust Link must identify the same resource as that of the URI provided in <code>data-originalurl</code> or as 
-      of one of the URIs of snapshots provided in <code>data-versionurl</code>. Client applications that consume Robust Links should 
-      treat links for which this is not the case with suspicion. 
+
       
       </div></div>   
       
@@ -416,7 +413,7 @@ web-archive-datetime = date-fullyear date-month date-mday time-hour time-minute 
         A value provided for <code>data-versiondate</code> must be interpreted as noon <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a> of the 
         indicated date, i.e. YYYY-MM-DD must be interpreted as YYYY-MM-DDT12:00:00Z and YYYYMMDD must be interpreted as YYYYMMDD120000. 
         Datetime values must only be provided when the required granular information is available to the linker, i.e. it should not be 
-        artificially generated on the basis of a know date value.
+        artificially generated on the basis of a known date value.
          
     <br /><br />
     <b>Examples</b> <code>data-versiondate="2024-11-21"</code> ; <code>data-versiondate="20241121"</code> ; <code>data-versiondate="20241121T162207Z" ; <code>data-versiondate="20241121162207"</code>
@@ -497,12 +494,13 @@ URI-R	URI-M1		1*URI-Mi(URI-M1)	date-linking
     The next day, an additional snapshot is created in the Internet Archive. 
     Its URI is <a href="https://web.archive.org/web/20241121100333/https://www.w3.org/"><code>https://web.archive.org/web/20241121100333/https://www.w3.org/</code></a> 
     and its snapshot date is <code>2024-11-21</code>. 
-    A <a href="https://www.w3.org/" data-originalurl="https://www.w3.org/" data-versiondate="2024-11-20" data-versionurl="https://perma.cc/44TF-9JXB 2024-11-20T16:43:33Z https://web.archive.org/web/20241121100333/https://www.w3.org/">Robust Link to the W3C home page</a> 
+    A <a href="https://www.w3.org/" data-originalurl="https://www.w3.org/" data-versiondate="2024-11-20" data-versionurl="https://perma.cc/44TF-9JXB 2024-11-20T16:43:33Z https://web.archive.org/web/20241121100333/https://www.w3.org/ 2024-11-21T10:03:33Z">Robust Link to the W3C home page</a> 
     can look like this:
 <pre>&lt;a href="https://www.w3.org/"
    data-originalurl="https://www.w3.org/"
    data-versiondate="2024-11-20"
-   data-versionurl="https://perma.cc/44TF-9JXB 2024-11-20T16:43:33Z https://web.archive.org/web/20241121100333/https://www.w3.org/"&gt;
+   data-versionurl="https://perma.cc/44TF-9JXB 2024-11-20T16:43:33Z 
+                    https://web.archive.org/web/20241121100333/https://www.w3.org/ 2024-11-21T10:03:33Z"&gt;
    Robust Link to the W3C home page
 &lt;/a&gt;
 </pre>
@@ -607,7 +605,7 @@ same as <a href="#scenario-1">Scenario 1</a> but applied to a snapshot instead o
     of the W3C home page <a href="https://web.archive.org/web/20241121100333/https://www.w3.org/"><code>https://web.archive.org/web/20241121100333/https://www.w3.org/</code></a>  
     existed on that day in the <a href="https://web.archive.org">Internet Archive</a>. 
     In order to do so, a snapshot of the snapshot is created in <a href="https://archive.today">archive.today</a>. 
-    It's URI is <a href="https://archive.ph/T9xD2"><code>https://archive.ph/T9xD2</code></a>. Although the snapshot is created on December 9th, 
+    Its URI is <a href="https://archive.ph/T9xD2"><code>https://archive.ph/T9xD2</code></a>. Although the snapshot is created on December 9th, 
     <a href="https://archive.today">archive.today</a> recognizes it as being a snapshot of a snapshot and maintains the snapshot datetime of the 
     original snapshot, i.e. <code>20241121T10:03:33Z</code>.  In this case, the  
         <a href="https://web.archive.org/web/20241121100333/https://www.w3.org/" 
