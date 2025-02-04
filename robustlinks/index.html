@@ -233,21 +233,27 @@ ol.nested-counter-list ol {
 <ol class="nested-counter-list">
 <li><a href="#intro">Why provide Robust Links?</a></li>
 <li><a href="#robust-links">How to provide Robust Links?</a>
-<li><a href="#data-attributes">Robust Links attributes</a></li>
+<li><a href="#data-attributes">Robust Links attributes</a>
   <ol>
   <li><a href="#href"><code>href</code></a></li>
   <li><a href="#data-versiondate"><code>data-versiondate</code></a></li>
   <li><a href="#data-versionurl"><code>data-versionurl</code></li>
   <li><a href="#data-originalurl"><code>data-originalurl</code></li>
   </ol>
-<li><a href="#examples">Examples</a></li>
+  </li>
+<li><a href="#examples">Examples</a>
   <ol>
   <li><a href="#example-1">Example 1: Linking to a live web resource</a></li>
   <li><a href="#example-2">Example 2: Linking to a snapshot of a web resource (A live web resource motivates the provision of the Robust Link)</a>
   <li><a href="#example-3">Example 3: Linking to a snapshot of a web resource (A snapshot of a live web resource motivates the provision of the Robust Link)</a></li>
-  </li>
   </ol>
+  </li>
+<li><a href="#appendix">Appendix</a>
+<ol>
+<li><a href="#abnf-1">ABNF for <code>data-versiondate</code></a></li>
+<li><a href="#abnf-2">ABNF for <code>data-versionurl</code></a></li>
 </ol>
+</li>
 </div>  
   
   
@@ -272,10 +278,11 @@ ol.nested-counter-list ol {
 Robust Link to the W3C home page that supports revisiting the way it looked on November 21th 2024
 &lt;/a&gt;
 </pre>
-The <code>data-*</code> attributes provided on the link can be leveraged by client applications to offer several pathways to visit the linked resource, 
-both in its current state (using <code>data-originalurl</code>) and in the state it was around the time it was linked (using <code>data-versionurl</code> and <code>data-versiondate</code>). 
+The <code>data-*</code> attributes provided on the link can be leveraged by client applications (or manually) 
+to visit the linked resource, both in its original state (using <code>data-originalurl</code>) 
+and in the state it was around the time it was linked (respectively using <code>data-versionurl</code>, and the combination of <code>data-originalurl</code> and <code>data-versiondate</code>). 
 Meanwhile, the URI provided in <code>href</code> remains the default target of the link as was intended by the linker. 
-As shown in the <a href="#examples">examples</a>, depending on the motivation for linking, that can be the URI of a snapshot of a resource or, more commonly, the URI of the resource itself.
+As shown in the <a href="#examples">examples</a>, depending on the motivation for linking, that can be the URI of the resource itself or the URI of a snapshot of the resource.
     </div></div>
   
     <div class="t100_2"><div class="style3">
@@ -285,16 +292,16 @@ As shown in the <a href="#examples">examples</a>, depending on the motivation fo
    But a link to a resource can be turned into a Robust Link 
     by including three <a href="https://html.spec.whatwg.org/#embedding-custom-non-visible-data-with-the-data-*-attributes">extension attributes</a> for 
             that element: <code>data-originalurl</code>, <code>data-versiondate</code>, and <code>data-versionurl</code>. 
-       Use of each attribute is recommended and their value is as follows:
+       The use and value of each attribute is recommended as follows:
                 <br />
 
     <ul>
-    <li><code>data-originalurl</code>: The <b>URI of the resource</b> that motivates the provision of a Robust Link. 
+    <li><code>data-originalurl</code>: REQUIRED - The <b>URI of the resource that motivates the provision of a Robust Link</b>. 
     In common cases, the default target resource (in <code>href</code>) is also the resource that motivates the provision of a Robust Link. 
     But, as illustrated by the <a href="#examples">Examples</a>, this is not always the case.</li>
-    <li><code>data-versiondate</code>: The intended <b>date of linking to the resource</b>, 
+    <li><code>data-versiondate</code>: REQUIRED - The intended <b>date of linking to the resource</b>, 
          i.e. the date of the state of the resource that the linker wants the link visitor to be able to experience.</li>
-    <li><code>data-versionurl</code>: The <b>URI of one or more snapshots of the resource</b>, 
+    <li><code>data-versionurl</code>: RECOMMENDED - The <b>URI of one or more snapshots of the resource</b>, 
     optionally accompanied by the <b>date those snapshots were created</b>. 
     Creation of snapshots of the linked resource is recommended and can, for example, be achieved as follows:
     <ul>
@@ -308,14 +315,14 @@ As shown in the <a href="#examples">examples</a>, depending on the motivation fo
       When these <code>data-*</code> attributes are provided in a machine-actionable manner, as detailed in the below sub-sections, 
       client applications can be devised that support several pathways to visit a linked resource:
     <ul>
-    <li>Using <code>data-originalurl</code>: Visiting the resource after it was linked to.</li>
-    <li>Using <code>data-versionurl</code>: Visiting each snapshot of the resource that was created.</li>
-    <li>Leveraging datetime-oriented API affordances (e.g. <a href="https://datatracker.ietf.org/doc/rfc7089/">Memento</a>) provided by web archives and resource versioning systems:
-    <ul>
-    <li>Using <code>data-originalurl</code> and <code>data-versiondate</code>: Finding snapshots of the resource that are temporally close the 
+    <li>Using <code>data-originalurl</code>: Visiting the resource after it was linked to. Cases exist in which that will not be possible 
+    because the original resource no longer exists. In such cases, <code>data-originalurl</code> still provides relevant provenance information.</li>
+    <li>Using <code>data-originalurl</code> in combination with <code>data-versiondate</code>: Finding snapshots of the resource that are temporally close the 
     intended linking date, in case no snapshots were created around the time of linking, 
     or in case snapshots that were created become temporally or permanently inaccessible.</li>
-    <li>Using <code>data-originalurl</code> and <code>data-versionurl</code>: Finding snapshots of the resource that are temporally close the dates snapshots were created, 
+
+    <li>Using <code>data-versionurl</code>: Visiting each snapshot of the resource that is listed.</li>
+    <li>Using <code>data-originalurl</code> in combination with <code>data-versionurl</code>: Finding snapshots of the resource that are temporally close the dates snapshots were created, 
     in case those snapshots becomes temporally or permanently inaccessible.</li> 
      </ul></li></ul>  
      
@@ -340,29 +347,32 @@ As shown in the <a href="#examples">examples</a>, depending on the motivation fo
         <div class="t100_2"><div class="style3">
     <a id="href"><h2>3.1. <code>href</code></h2></a>
         
-      Use of the <code>href</code> attribute is mandatory and its value is as detailed by the <a href="https://html.spec.whatwg.org/#links-created-by-a-and-area-elements">pertinent HTML specification</a>. 
+      Use of the <code>href</code> attribute is REQUIRED and its value is as detailed by the <a href="https://html.spec.whatwg.org/#links-created-by-a-and-area-elements">pertinent HTML specification</a>. 
 
       
       </div></div>   
       
           <div class="t100_2"><div class="style3">
     <a id="data-originalurl"><h2>3.2. <code>data-originalurl</code></h2></a>
-    Use of the <code>data-originalurl</code> attribute is recommended. Its value is the URI of the resource that motivates  
+    Use of the <code>data-originalurl</code> attribute is REQUIRED. Its value is the URI of the resource that motivates  
     the provision of a Robust Link. The URI must be absolute, not relative.
-    <br /><br />
-    As shown in the <a href="#examples">Examples</a>, the URI provided in <code>data-originalurl</code>
-    commonly, but not always, identifies the same resource as the URI provided for the <code>href</code> attribute. 
-    Therefor, in cases in which <code>data-originalurl</code> is not provided, applications that consume Robust Links may use 
-    (the absolute URI rendition of) the URI in <code>href</code> as the value for <code>data-originalurl</code>.
-     <br /><br />
+         <br /><br />
     <b>Example</b> <code>data-originalurl="https://www.w3.org/"</code>
+    <br /><br />
+    In case no value is provided for the attribute, client applications may attempt to determine a plausible value, taking the linking context into account. 
+    For example, as shown in the <a href="#examples">Examples</a>, the URI provided in <code>data-originalurl</code>
+    commonly, but not always, identifies the same resource as the URI provided for the <code>href</code> attribute. 
+    Therefor, in cases in which <code>data-originalurl</code> is not provided, client applications might decide to use 
+    (the absolute URI rendition of) the URI in <code>href</code> as the value for <code>data-originalurl</code>.
+
      </div></div>     
         
     <div class="t100_2"><div class="style3">
     <a id="data-versiondate"><h2>3.3. <code>data-versiondate</code></h2></a>
-    Use of the <code>data-versiondate</code> attribute is recommended. Its value is the intended datetime of linking expressed in <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a>. 
+    Use of the <code>data-versiondate</code> attribute is REQUIRED. Its value is the intended datetime of linking expressed in <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a>. 
     The value can be provided at date or datetime granularity using a choice of two syntaxes: one aligned with <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO8601</a> and the other following 
-    a convention to express datetimes in URIs that is commonly used by web archives. Valid values are mnemonically shown in the table below.  
+    a convention to express datetimes in URIs that is commonly used by web archives. Valid values are mnemonically shown in the table below and are 
+    formalized in the <a href="#abnf-1">ABNF for <code>data-versiondate</code></a>.  
     
         <br /><br />
     
@@ -389,60 +399,42 @@ As shown in the <a href="#examples">examples</a>, depending on the motivation fo
 </div> 
 
     <br /><br />
-    
-    Valid values for <code>data-versiondate</code> are defined by the below ABNF that reuses the following constructs from 
-    the ABNF in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">Section 5.6 of RFC3339</a>: 
-    <code>date-fullyear</code>, <code>date-month</code>, <code>date-mday</code>, <code>time-hour</code>, <code>time-minute</code>, <code>time-second</code>.
-    
-            <pre> <code>
-data-versiondate = versiondate 
-versiondate = (date , datetime) 
-date = (iso8601-date , web-archive-date)
-datetime = (iso8601-datetime , web-archive-datetime)
-iso8601-date = date-fullyear "-" date-month "-" date-mday
-web-archive-date = date-fullyear date-month date-mday
-iso8601-datetime = date-fullyear "-" date-month "-" date-mday "T" time-hour ":" time-minute ":" time-second "Z"
-web-archive-datetime = date-fullyear date-month date-mday time-hour time-minute time-second
-       </code> </pre>
-    
-    
+    <b>Examples</b> <code>data-versiondate="2024-11-21"</code> ; <code>data-versiondate="20241121"</code> ; <code>data-versiondate="20241121T162207Z"</code> ; <code>data-versiondate="20241121162207"</code>
+
+ <br /><br /> 
+ 
         A value provided for <code>data-versiondate</code> must be interpreted as noon <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a> of the 
         indicated date, i.e. YYYY-MM-DD must be interpreted as YYYY-MM-DDT12:00:00Z and YYYYMMDD must be interpreted as YYYYMMDD120000. 
         Datetime values must only be provided when the required granular information is available to the linker, i.e. it should not be 
         artificially generated on the basis of a known date value.
-         
+
     <br /><br />
-    <b>Examples</b> <code>data-versiondate="2024-11-21"</code> ; <code>data-versiondate="20241121"</code> ; <code>data-versiondate="20241121T162207Z" ; <code>data-versiondate="20241121162207"</code>
-   </div></div>
+   
+         In case no value is provided for the attribute, client applications may attempt to determine a plausible value, taking the linking context into account. 
+    For example, a client application might decide to use the creation date or last modification date of the HTML page in which the Robust Link is provided, 
+    as the value for <code>data-versiondate</code>.
+        
+            </div></div>
         
     <div class="t100_2"><div class="style3">
     <a id="data-versionurl"><h2>3.4. <code>data-versionurl</code></h2></a>
-    Use of the <code>data-versionurl</code> attribute is recommended. 
+    Use of the <code>data-versionurl</code> attribute is RECOMMENDED. 
     Its value is a list of one or more URIs of snapshots of the resource that motivates the provision of a Robust Link (see <a href="#data-originalurl"><code>data-originalurl</code></a>), whereby each snapshot URI may optionally be followed by that snapshot's datetime. 
-    URIs must be absolute, not relative. The provided information elements (URIs and datetimes) must be space-separated. 
-    This ABNF formalizes the syntax of the attribute's value:
-        <pre> <code>
-data-versionurl = (URI *1(SP versiondate)) *(SP URI *1(SP versiondate))
-URI = (http-URI , https-URI)
-       </code> </pre>
-    In this ABNF:
-    <ul>
-    <li><code>versiondate</code> is the construct defined by the ABNF in the <a href="#data-versiondate"><code>data-versiondate</code> section</a>.</li>
-    <li><code>http-URI</code> is the construct of the ABNF in <a href="https://httpwg.org/specs/rfc7230.html#http.uri">Section 2.7.1 of RFC7230</a> that represents an absolute HTTP URI with optional query and fragment components.</li>
-     <li><code>https-URI</code> is the construct of the ABNF in <a href="https://httpwg.org/specs/rfc7230.html#https.uri">Section 2.7.2 of RFC7230</a> that represents an absolute HTTPS URI with optional query and fragment components.</li>
-    </ul>
+    URIs must be absolute, not relative. The provided information elements (URIs and datetimes) must be space-separated. The attribute's value is formalized 
+    in the <a href="#abnf-2">ABNF for <code>data-versionurl</code></a>. 
+    
+        <br /><br />
+
+    <b>Example</b> <code>data-versionurl="https://web.archive.org/web/20241121100333/https://www.w3.org/ https://perma.cc/44TF-9JXB 20241120164333"</code>
+
+         <br /><br />      
     
      A snapshot datetime provided in <code>data-versionurl</code> must be interpreted as noon <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a> of the 
         indicated date, i.e. YYYY-MM-DD must be interpreted as YYYY-MM-DDT12:00:00Z and YYYYMMDD must be interpreted as YYYYMMDD120000. 
         Datetime values must only be provided when the required granular information is available to the linker, i.e. it should not be 
         artificially generated on the basis of a know date value.
 
-    <br /><br />
-
-    <b>Example</b> <code>data-versionurl="https://web.archive.org/web/20241121100333/https://www.w3.org/ https://perma.cc/44TF-9JXB 20241120164333"</code>
     </div></div>
-    
-
         
             <div class="t100_2"><div class="style3">
     <a id="examples"><h1>4. Examples</h1></a>
@@ -450,25 +442,6 @@ URI = (http-URI , https-URI)
      in <a href="#example-1">Example 1</a>, the default link target (URI in <code>href</code>) is a live web resource, 
      whereas in <a href="#example-2">Example 2</a> and <a href="#example-3">Example 3</a> it is a snapshot of a web resource. 
     
-    <!-- 
-href	original-url	version-url		version-date time
-
-Focus on URI-R, pathways to Mementos of URI-R:
-
-URI-R	URI-R		1*URI-Mi(URI-R)		date-linking
-
-Focus on Memento URI-M1(URI-R), pathways to other Mementos of URI-R:
-
-URI-M1	URI-R		1*URI-Mi(URI-R)		date-linking
-
-Focus on a Memento URI-M1(URI-R), pathways to Mementos of Memento URI-M1(URI-R)
-
-URI-M1	URI-M1		1*URI-Mi(URI-M1)	date-linking
-
-FALSE : 
-
-URI-R	URI-M1		1*URI-Mi(URI-M1)	date-linking
-    -->
   
     <div class="t100_2"><div class="style3">
     <a id="example-1"><h2>4.1. Example 1: Linking to a live web resource</h2></a>
@@ -515,7 +488,7 @@ The <a href="http://www.w3.org/" data-originalurl="https://www.w3.org/" data-ver
 
      
      <div class="t100_2"><div class="style3">
-     <a id="example-2"><h3>4.2. Linking to a snapshot of a web resource - A live web resource motivates the provision of the Robust Link</h3></a>
+     <a id="example-2"><h2>4.2. Linking to a snapshot of a web resource - A live web resource motivates the provision of the Robust Link</h2></a>
     
     Sometimes a live web resource motivates the provision of a Robust Link yet the intent is for the default link 
     to target a specific version thereof, for example a snapshot 
@@ -579,7 +552,7 @@ The <a href="http://www.w3.org/" data-originalurl="https://www.w3.org/" data-ver
     </div></div>
 
      <div class="t100_2"><div class="style3">
-     <a id="example-3"><h3>4.3. Linking to a snapshot of a web resource - A snapshot of a live web resource motivates the provision of the Robust Link</h3></a>
+     <a id="example-3"><h2>4.3. Linking to a snapshot of a web resource - A snapshot of a live web resource motivates the provision of the Robust Link</h2></a>
      
 For completeness, the Robust Links approach can be further illustrated by means of a scenario that might be appealing to frequent users of web archives. 
 In this scenario, a snapshot of a web resource motivates the provision of a Robust Link and, for example, in order to prove that a specific snapshot/version existed, 
@@ -614,8 +587,52 @@ same as <a href="example-1">Example 1</a> but applied to a snapshot instead of a
 &lt;/a&gt;
 </pre>
     
-    
     <br><br>
+    
+                <div class="t100_2"><div class="style3">
+    <a id="appendix"><h1>5. Appendix</h1></a>
+    </div>
+    
+                    <div class="t100_2"><div class="style3">
+    <a id="abnf-1"><h2>5.1. ABNF for <code>data-versiondate</code></h2></a>
+    
+     Valid values for the <code>data-versiondate</code> attribute are defined by the below ABNF that reuses the following constructs:
+     <ul>
+     <li><code>date-fullyear</code>, <code>date-month</code>, <code>date-mday</code>, <code>time-hour</code>, <code>time-minute</code>, <code>time-second</code> 
+     from the ABNF in <a href="https://www.rfc-editor.org/rfc/rfc3339#section-5.6">Section 5.6 of RFC3339</a></li>
+     </ul>
+    
+            <pre> <code>
+data-versiondate = versiondate 
+versiondate = date / datetime
+date = iso8601-date / web-archive-date
+datetime = iso8601-datetime / web-archive-datetime
+iso8601-date = date-fullyear "-" date-month "-" date-mday
+web-archive-date = date-fullyear date-month date-mday
+iso8601-datetime = date-fullyear "-" date-month "-" date-mday "T" time-hour ":" time-minute ":" time-second "Z"
+web-archive-datetime = date-fullyear date-month date-mday time-hour time-minute time-second
+       </code> </pre>
+    
+    </div>
+    
+                    <div class="t100_2"><div class="style3">
+    <a id="abnf-2"><h2>5.2. ABNF for <code>data-versionurl</code></h2></a>
+    
+    Valid values for the <code>data-versionurl</code> attribute are defined by the below ABNF that reuses the following constructs:
+    <ul>
+    <li><code>versiondate</code> as defined by the <a href="#abnf-1">ABNF for <code>data-versiondate</code></a></li>
+    <li><code>scheme</code>, <code>authority</code>, <code>path-absolute</code>, <code>query</code>, and <code>fragment</code> as defined in 
+    <a href="https://datatracker.ietf.org/doc/html/rfc3986#appendix-A">Appendix A of RFC3896</a></li>
+    </ul>
+    
+     <pre> <code>
+data-versionurl = (snapshot-URI *1(SP versiondate)) *(SP URI *1(SP versiondate))
+snapshot-URI = scheme ":" "//" authority path-absolute [ "?" query ] [ "#" fragment ]
+       </code> </pre>
+    
+    
+    </div>
+    
 
 <div id="menu_bottom" style="background: #eee; height: 60px; bottom: 0; position: relative; width: 980px; margin: 0;">
   <iframe src="index_files/menu_bottom_cc.html" style="border: 0; width: 980px; height: 55px"></iframe>
