@@ -18,7 +18,7 @@
   <meta name="twitter:title" content="Robustifying Links">
   <meta name="twitter:description" content="Robust Links provide multiple pathways to revisit the original content of a link. This document describes approaches to robustify links in HTML pages.">
 
-  <meta itemprop="dateModified" content="2024-12-12">
+  <meta itemprop="dateModified" content="2025-02-04">
   <meta itemprop="datePublished" content="2015-01-23">
   <title>Robust Links</title>
   
@@ -155,7 +155,7 @@ ol.nested-counter-list ol {
     EXPERIMENTAL DRAFT REVISION OF <a href="https://robustlinks.mementoweb.org/spec/">https://robustlinks.mementoweb.org/spec/</a>
   </div>
   <br />
-         Last updated: December 12, 2024
+         Last updated: February 4, 2025
         </div>
 
 
@@ -203,10 +203,9 @@ ol.nested-counter-list ol {
     <br />
     Need to discuss: 
     <ul>
-    <li>Authorship</li>
-    <li>Can all of this be restricted to http(s) or does it need to be URIs in general?</li>
     <li>Section "Archiving Considerations” to discuss some recommendations on how archival replay systems should or should not rewrite URLs in data-* attributes.</li>
     <li>Section "Security Considerations" for clients that consume RL annotations</li>
+    <li>Authorship</li>
     <li>Where to publish</li>
     <li>DOI-ed CSS and JS</li>
     <li>Existing tools and documentation</li>
@@ -241,14 +240,11 @@ ol.nested-counter-list ol {
   <li><a href="#data-versionurl"><code>data-versionurl</code></li>
   <li><a href="#data-originalurl"><code>data-originalurl</code></li>
   </ol>
-<li><a href="#scenarios">Scenarios</a></li>
+<li><a href="#examples">Examples</a></li>
   <ol>
-  <li><a href="#scenario-1">Scenario 1: Linking to a live web resource</a></li>
-  <li><a href="#scenario-2">Scenario 2: Linking to a snapshot of a web resource</a>
-      <ol>
-      <li><a href="#scenario-2-1">A live web resource motivates the provision of the Robust Link</a></li>
-      <li><a href="#scenario-2-2">A snapshot of a live web resource motivates the provision of the Robust Link</a></li>
-      </ol>
+  <li><a href="#example-1">Example 1: Linking to a live web resource</a></li>
+  <li><a href="#example-2">Example 2: Linking to a snapshot of a web resource (A live web resource motivates the provision of the Robust Link)</a>
+  <li><a href="#example-3">Example 3: Linking to a snapshot of a web resource (A snapshot of a live web resource motivates the provision of the Robust Link)</a></li>
   </li>
   </ol>
 </ol>
@@ -279,7 +275,7 @@ Robust Link to the W3C home page that supports revisiting the way it looked on N
 The <code>data-*</code> attributes provided on the link can be leveraged by client applications to offer several pathways to visit the linked resource, 
 both in its current state (using <code>data-originalurl</code>) and in the state it was around the time it was linked (using <code>data-versionurl</code> and <code>data-versiondate</code>). 
 Meanwhile, the URI provided in <code>href</code> remains the default target of the link as was intended by the linker. 
-As shown in the <a href="#scenarios">scenarios</a>, depending on the motivation for linking, that can be the URI of a snapshot of a resource or, more commonly, the URI of the resource itself.
+As shown in the <a href="#examples">examples</a>, depending on the motivation for linking, that can be the URI of a snapshot of a resource or, more commonly, the URI of the resource itself.
     </div></div>
   
     <div class="t100_2"><div class="style3">
@@ -295,7 +291,7 @@ As shown in the <a href="#scenarios">scenarios</a>, depending on the motivation 
     <ul>
     <li><code>data-originalurl</code>: The <b>URI of the resource</b> that motivates the provision of a Robust Link. 
     In common cases, the default target resource (in <code>href</code>) is also the resource that motivates the provision of a Robust Link. 
-    But, as illustrated by the <a href="#scenarios">Scenarios</a>, this is not always the case.</li>
+    But, as illustrated by the <a href="#examples">Examples</a>, this is not always the case.</li>
     <li><code>data-versiondate</code>: The intended <b>date of linking to the resource</b>, 
          i.e. the date of the state of the resource that the linker wants the link visitor to be able to experience.</li>
     <li><code>data-versionurl</code>: The <b>URI of one or more snapshots of the resource</b>, 
@@ -354,7 +350,7 @@ As shown in the <a href="#scenarios">scenarios</a>, depending on the motivation 
     Use of the <code>data-originalurl</code> attribute is recommended. Its value is the URI of the resource that motivates  
     the provision of a Robust Link. The URI must be absolute, not relative.
     <br /><br />
-    As shown in the <a href="#scenarios">scenarios</a>, the URI provided in <code>data-originalurl</code>
+    As shown in the <a href="#examples">Examples</a>, the URI provided in <code>data-originalurl</code>
     commonly, but not always, identifies the same resource as the URI provided for the <code>href</code> attribute. 
     Therefor, in cases in which <code>data-originalurl</code> is not provided, applications that consume Robust Links may use 
     (the absolute URI rendition of) the URI in <code>href</code> as the value for <code>data-originalurl</code>.
@@ -449,10 +445,10 @@ URI = (http-URI , https-URI)
 
         
             <div class="t100_2"><div class="style3">
-    <a id="scenarios"><h1>3. Scenarios</h1></a>
+    <a id="examples"><h1>4. Examples</h1></a>
      This section provides examples for two scenarios that differ with regard to the nature of the link target:  
-     in <a href="#scenario-1">Scenario 1</a>, the default link target (URI in <code>href</code>) is a live web resource, 
-     whereas in <a href="#scenario-2">Scenario 2</a> it is a snapshot of a web resource. 
+     in <a href="#example-1">Example 1</a>, the default link target (URI in <code>href</code>) is a live web resource, 
+     whereas in <a href="#example-2">Example 2</a> and <a href="#example-3">Example 3</a> it is a snapshot of a web resource. 
     
     <!-- 
 href	original-url	version-url		version-date time
@@ -475,7 +471,7 @@ URI-R	URI-M1		1*URI-Mi(URI-M1)	date-linking
     -->
   
     <div class="t100_2"><div class="style3">
-    <a id="scenario-1"><h2>3.1. Scenario 1: Linking to a live web resource</h2></a>
+    <a id="example-1"><h2>4.1. Example 1: Linking to a live web resource</h2></a>
     
    In a common case, the main intent is to link to a live web resource and to also allow future users of the link  
    to see the state of the linked resource around the date that was intended by the linker. In this case, the
@@ -516,13 +512,10 @@ The <a href="http://www.w3.org/" data-originalurl="https://www.w3.org/" data-ver
 </li>
 </ul>
     </div></div>
-  
-    <div class="t100_2"><div class="style3">
-    <a id="scenario-2"><h2>3.2. Scenario 2: Linking to a snapshot of a web resource</h2></a>
-    </div></div>
+
      
      <div class="t100_2"><div class="style3">
-     <a id="scenario-2-1"><h3>3.2.1. A live web resource motivates the provision of the Robust Link</h3></a>
+     <a id="example-2"><h3>4.2. Linking to a snapshot of a web resource - A live web resource motivates the provision of the Robust Link</h3></a>
     
     Sometimes a live web resource motivates the provision of a Robust Link yet the intent is for the default link 
     to target a specific version thereof, for example a snapshot 
@@ -586,12 +579,12 @@ The <a href="http://www.w3.org/" data-originalurl="https://www.w3.org/" data-ver
     </div></div>
 
      <div class="t100_2"><div class="style3">
-     <a id="scenario-2-2"><h3>3.2.2. A snapshot of a live web resource motivates the provision of the Robust Link</h3></a>
+     <a id="example-3"><h3>4.3. Linking to a snapshot of a web resource - A snapshot of a live web resource motivates the provision of the Robust Link</h3></a>
      
 For completeness, the Robust Links approach can be further illustrated by means of a scenario that might be appealing to frequent users of web archives. 
 In this scenario, a snapshot of a web resource motivates the provision of a Robust Link and, for example, in order to prove that a specific snapshot/version existed, 
 a snapshot of that snapshot is created in a system other than the one that hosts the original snapshot. In this case, which essentially is the 
-same as <a href="#scenario-1">Scenario 1</a> but applied to a snapshot instead of a live web resource, values for the attributes on the link are as follows:
+same as <a href="example-1">Example 1</a> but applied to a snapshot instead of a live web resource, values for the attributes on the link are as follows:
     <ul>
     <li><code>href</code>: the URI of the snapshot/version that captures the desired state of the resource.</li>
     <li><code>data-originalurl</code>: the URI of the snapshot/version that captures the desired state of the resource.</li>
