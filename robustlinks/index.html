@@ -18,7 +18,7 @@
   <meta name="twitter:title" content="Robustifying Links">
   <meta name="twitter:description" content="Robust Links provide multiple pathways to revisit the original content of a link. This document describes approaches to robustify links in HTML pages.">
 
-  <meta itemprop="dateModified" content="2025-02-04">
+  <meta itemprop="dateModified" content="2025-02-10">
   <meta itemprop="datePublished" content="2015-01-23">
   <title>Robust Links</title>
   
@@ -155,7 +155,7 @@ ol.nested-counter-list ol {
     EXPERIMENTAL DRAFT REVISION OF <a href="https://robustlinks.mementoweb.org/spec/">https://robustlinks.mementoweb.org/spec/</a>
            </div>
   <br />
-         Last updated: February 4, 2025
+         Last updated: February 10, 2025
        </div></div>
     
 <br>
@@ -192,20 +192,6 @@ ol.nested-counter-list ol {
     &nbsp;&nbsp;&nbsp;Herbert Van de Sompel - Data Archiving and Networking Services (DANS)
   </div>
 </div>
-
-    <div class="t100_2" style="color:red;">
-    <br />
-    Need to discuss: 
-    <ul>
-    <li>Section "Archiving Considerations” to discuss some recommendations on how archival replay systems should or should not rewrite URLs in data-* attributes.</li>
-    <li>Section "Security Considerations" for clients that consume RL annotations</li>
-    <li>Authorship</li>
-    <li>Where to publish</li>
-    <li>DOI-ed CSS and JS</li>
-    <li>Existing tools and documentation</li>
-    </ul>
-     </div>
-
   
     <div class="t100_2"><div class="style3">
     <a id="referencing"><h2>Abstract</h2></a>
@@ -238,7 +224,8 @@ ol.nested-counter-list ol {
 <li><a href="#examples">Examples</a>
   <ol>
   <li><a href="#example-live">Linking to a live web resource</a></li>
-  <li><a href="#example-snapshot">Linking to a snapshot</a>
+  <li><a href="#example-snapshot-1">Linking to a snapshot - Live web resource provides motivation</a>
+    <li><a href="#example-snapshot-2">Linking to a snapshot - Snapshot provides motivation</a>
   </ol>
   </li>
 <li><a href="#appendix">Appendix</a>
@@ -567,12 +554,8 @@ An example of such a <a href="https://youngfarmersclaimfuture.info/barn/tex/max.
 </pre>
     </div></div>
     
-    
-
-
-     
      <div class="t100_2"><div class="style3">
-     <a id="example-snapshot"><h2>4.2. Linking to a snapshot - A live web resource motivates the provision of the Robust Link</h2></a>
+     <a id="example-snapshot-1"><h2>4.2. Linking to a snapshot - Live web resource provides motivation</h2></a>
     
     Sometimes a live web resource motivates the provision of a Robust Link yet the intent is for the default link 
     to target a specific version thereof, for example a snapshot 
@@ -590,7 +573,7 @@ An example of such a <a href="https://youngfarmersclaimfuture.info/barn/tex/max.
     </div></div>
     
         <div class="t100_2"><div class="style3">
-    <a id="example-snapshot-1"><b>Example 4.2.1. Specific resource state in a web archive</b></a>
+    <a id="example-snapshot-1-1"><b>Example 4.2.1. Specific resource state in a web archive</b></a>
     <br /><br />
     Assume creating a Robust Link on November 21st 2024 that is primarily intended to convey the state of 
     <code>https://www.w3.org/</code> on that day. In order to do so, 
@@ -615,7 +598,7 @@ An example of such a <a href="https://youngfarmersclaimfuture.info/barn/tex/max.
 </div></div>
 
         <div class="t100_2"><div class="style3">
-   <a id="example-snapshot-2"><b>Example 4.2.2. Specific resource state in a version control system, take 1</b></a>
+   <a id="example-snapshot-1-2"><b>Example 4.2.2. Specific resource state in a version control system, take 1</b></a>
    <br /><br />
    Assume creating a Robust Link on November 22nd 2024 that is primarily intended to point to the version of 
     <a href="https://en.wikipedia.org/wiki/Web_archiving"><code>https://en.wikipedia.org/wiki/Web_archiving</code></a> that is current on that day, 
@@ -637,7 +620,7 @@ An example of such a <a href="https://youngfarmersclaimfuture.info/barn/tex/max.
 
 
         <div class="t100_2"><div class="style3">
-   <a id="example-snapshot-3"><b>Example 4.2.3. Specific resource state in a version control system, take 2</b></a> 
+   <a id="example-snapshot-1-3"><b>Example 4.2.3. Specific resource state in a version control system, take 2</b></a> 
    <br /><br />
    Assume creating a Robust Link on November 22nd 2024 that is primarily intended to point to the version of 
     <a href="https://en.wikipedia.org/wiki/Web_archiving"><code>https://en.wikipedia.org/wiki/Web_archiving</code></a> 
@@ -657,12 +640,13 @@ An example of such a <a href="https://youngfarmersclaimfuture.info/barn/tex/max.
     </div></div>
 
      <div class="t100_2"><div class="style3">
-     <a id="example-3"><h2>4.3. Linking to a snapshot of a web resource - A snapshot of a live web resource motivates the provision of the Robust Link</h2></a>
+     <a id="example-snapshot-2"><h2>4.3. Linking to a snapshot of a web resource - Snapshot provides motivation</h2></a>
      
-For completeness, the Robust Links approach can be further illustrated by means of a scenario that might be appealing to frequent users of web archives. 
-In this scenario, a snapshot of a web resource motivates the provision of a Robust Link and, for example, in order to prove that a specific snapshot/version existed, 
-a snapshot of that snapshot is created in a system other than the one that hosts the original snapshot. In this case, which essentially is the 
-same as <a href="example-1">Example 1</a> but applied to a snapshot instead of a live web resource, values for the attributes on the link are as follows:
+The Robust Links approach can be further illustrated by means of an example that might be appealing to frequent users of web archives. 
+In this example, a snapshot of a web resource motivates the provision of a Robust Link and, for example, 
+in order to prove that a specific snapshot/version existed, 
+a snapshot of that snapshot is created in a system other than the one that hosts the original snapshot. In this case, 
+values for the attributes on the link are as follows:
     <ul>
     <li><code>href</code>: the URI of the snapshot/version that captures the desired state of the resource.</li>
     <li><code>data-originalurl</code>: the URI of the snapshot/version that captures the desired state of the resource.</li>
@@ -747,6 +731,19 @@ Richard Wincewicz (University of Edinburgh).
 <br /><br />
 
     </div></div>
+    
+    
+        <div class="t100_2" style="color:red;">
+    <br />
+    To discuss: 
+    <ul>
+    <li>Section "Archiving Considerations” to discuss some recommendations on how archival replay systems should or should not rewrite URLs in data-* attributes.</li>
+    <li>Section "Security Considerations" for clients that consume RL annotations</li>
+    <li>Where to publish</li>
+    <li>DOI-ed CSS and JS</li>
+    <li>Existing tools and documentation</li>
+    </ul>
+     </div>
     
 
 <div id="menu_bottom" style="background: #eee; height: 60px; bottom: 0; position: relative; width: 980px; margin: 0;">
