@@ -158,7 +158,7 @@ ol.nested-counter-list ol {
                                       data-versionurl="http://web.archive.org/web/20201018132742/https://robustlinks.mementoweb.org/spec/">https://robustlinks.mementoweb.org/spec/</a>
            </div>
   <br />
-         Last updated: February 10, 2025
+         Last updated: March 17, 2025
        </div></div>
     
 <br>
@@ -199,7 +199,8 @@ ol.nested-counter-list ol {
     <div class="t100_2"><div class="style3">
     <a id="referencing"><h2>Abstract</h2></a>
     A Robust Link offers multiple pathways to revisit the content of a linked resource, even
-    a long time after the link to the resource was put in place. It combats link rot and content drift, problems that are prevalent with links on the Web.
+    a long time after the link to the resource was put in place. It combats problems that are prevalent with links on the Web:
+    linked resources vanish (link rot; 404 Not Found) or their content changes over time (content drift).
     This document describes how to provide Robust Links in HTML. It recommends creating one or more snapshots of a resource 
     around the time of linking to it, for example, in a web archive or a versioning system. And it recommends creating a Robust Link 
     by conveying the following information as attributes on the link to a resource: 
@@ -222,6 +223,7 @@ ol.nested-counter-list ol {
   <li><a href="#data-versiondate"><code>data-versiondate</code></a></li>
   <li><a href="#data-versionurl"><code>data-versionurl</code></li>
   <li><a href="#data-originalurl"><code>data-originalurl</code></li>
+  <li><a href="#missing-attribute"><code>Missing attribute information</code></li>
   </ol>
   </li>
 <li><a href="#examples">Examples</a>
@@ -334,12 +336,6 @@ As shown in the <a href="#examples">examples</a>, depending on the motivation fo
     the provision of a Robust Link. The URI must be absolute, not relative.
          <br /><br />
     <b>Example</b> <code>data-originalurl="https://www.w3.org/"</code>
-    <br /><br />
-    In case no value is provided for the attribute, client applications may attempt to determine a plausible value, taking the linking context into account. 
-    For example, as shown in the <a href="#examples">Examples</a>, the URI provided in <code>data-originalurl</code>
-    commonly, but not always, identifies the same resource as the URI provided for the <code>href</code> attribute. 
-    Therefor, in cases in which <code>data-originalurl</code> is not provided, client applications might decide to use 
-    (the absolute URI rendition of) the URI in <code>href</code> as the value for <code>data-originalurl</code>.
 
      </div></div>     
         
@@ -381,14 +377,8 @@ As shown in the <a href="#examples">examples</a>, depending on the motivation fo
  
         A value provided for <code>data-versiondate</code> must be interpreted as noon <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a> of the 
         indicated date, i.e. YYYY-MM-DD must be interpreted as YYYY-MM-DDT12:00:00Z and YYYYMMDD must be interpreted as YYYYMMDD120000. 
-        Datetime values must only be provided when the required granular information is available to the linker, i.e. it should not be 
-        artificially generated on the basis of a known date value.
 
-    <br /><br />
-   
-         In case no value is provided for the attribute, client applications may attempt to determine a plausible value, taking the linking context into account. 
-    For example, a client application might decide to use the creation date or last modification date of the HTML page in which the Robust Link is provided 
-    as the value for <code>data-versiondate</code>.
+
         
             </div></div>
         
@@ -407,10 +397,34 @@ As shown in the <a href="#examples">examples</a>, depending on the motivation fo
     
      A snapshot datetime provided in <code>data-versionurl</code> must be interpreted as noon <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a> of the 
         indicated date, i.e. YYYY-MM-DD must be interpreted as YYYY-MM-DDT12:00:00Z and YYYYMMDD must be interpreted as YYYYMMDD120000. 
-        Datetime values must only be provided when the required granular information is available to the linker, i.e. it should not be 
-        artificially generated on the basis of a know date value.
 
     </div></div>
+    
+    
+    <div class="t100_2"><div class="style3">
+    <a id="missing-attribute"><h2>3.5. Missing attribute information</h2></a>
+
+Values for the <code>data-versiondate</code> attribute must only be provided at the granularity available to the linker, 
+i.e. should not be artificially generated on the basis of a known date value.
+
+           <br /><br />
+           
+         In case no value is provided for the <code>data-versiondate</code> attribute, client applications may attempt to determine a plausible value, 
+         taking the linking context into account. For example, a client application might decide to use the creation date or last modification date of the 
+         HTML page in which the Robust Link is provided as the value for <code>data-versiondate</code>.
+         
+        <br /><br />
+        
+    In case no value is provided for the <code>data-originalurl</code> attribute, client applications may attempt to determine a plausible value, 
+    taking the linking context into account. 
+    For example, as shown in the <a href="#examples">Examples</a>, the URI provided in <code>data-originalurl</code>
+    commonly, but not always, identifies the same resource as the URI provided for the <code>href</code> attribute. 
+    Therefore, in cases in which <code>data-originalurl</code> is not provided, client applications might decide to use 
+    (the absolute URI rendition of) the URI in <code>href</code> as the value for <code>data-originalurl</code>.
+
+    </div></div>
+    
+    
         
     <div class="t100_2"><div class="style3">
     <a id="examples"><h1>4. Examples</h1></a>
@@ -468,12 +482,13 @@ As shown in the <a href="#examples">examples</a>, depending on the motivation fo
 <a id="example-live-2"><b>Example 4.1.2. Common case, minimal</b></a>
 
     <br /><br />
-Assume creating a Robust Link to <code>https://www.w3.org/</code> on November 20th 2024, without creating any snapshots of the linked resource. 
+Assume creating a Robust Link to <code>https://www.w3.org/</code> on November 20th 2024, a very busy day that leaves you with no time to 
+create any snapshots of the linked resource. 
 A <a href="http://www.w3.org/" 
   data-originalurl="https://www.w3.org/" 
   data-versiondate="2024-11-20">
-Robust Link to <code>https://www.w3.org/</code></a> that is less expressive than the one in <a href="#example-live-1">Example 4.1.1.</a> 
-    would be:
+Robust Link to <code>https://www.w3.org/</code></a> that is less expressive than the one in <a href="#example-live-1">Example 4.1.1.</a>, 
+but still supports the creation of alternative pathways to visit the linked resource would be:
 <pre>&lt;a href="https://www.w3.org/"
    data-originalurl="https://www.w3.org/"
    data-versiondate="2024-11-20"&gt;
@@ -486,14 +501,14 @@ Robust Link to <code>https://www.w3.org/</code></a> that is less expressive than
 <a id="example-live-3"><b>Example 4.1.3. Resource moved</b></a>
 
     <br /><br />
-On January 20th 2017, the Barack Obama administration left the White House. Around 17:00 CET on that day, 
+On January 20th 2017, the US administration changed hands. Around 17:00 CET on that day, 
 the domain <code>https://whitehouse.gov</code> was taken over by the new administration. 
-By that time, the content of the Obama administration White House pages had been moved to <code>https://obamawhitehouse.archives.gov</code>. 
+By that time, the content of the previous administration's White House pages had been moved to <code>https://obamawhitehouse.archives.gov</code>. 
 A <a href="https://obamawhitehouse.archives.gov"
    data-originalurl="https://whitehouse.gov"
    data-versiondate="2017-01-20T12:00:00Z"
    data-versionurl="https://web.archive.org/web/20170120160218/https://www.whitehouse.gov/ 2017-01-20T16:02:18Z
-                    https://perma.cc/39FJ-5K7L 2017-01-20T14:26:00Z"/>Robust Link to that moved resource</a>  
+                    https://perma.cc/39FJ-5K7L 2017-01-20T14:26:00Z"/>Robust Link to the previous administration's White House page</a>  
 that expresses provenance and, additionally, conveys snapshots of the very last versions that were available at 
 <code>https://whitehouse.gov</code> would be:
 
@@ -502,7 +517,7 @@ that expresses provenance and, additionally, conveys snapshots of the very last 
    data-versiondate="2017-01-20T12:00:00Z"
    data-versionurl="https://web.archive.org/web/20170120160218/https://www.whitehouse.gov/ 2017-01-20T16:02:18Z
                     https://perma.cc/39FJ-5K7L 2017-01-20T14:26:00Z"&gt;
-   Robust Link to the Barack Obama administration White House page
+   Robust Link to the previous administration's White House page
 &lt;/a&gt;
 </pre>
     </div></div>
