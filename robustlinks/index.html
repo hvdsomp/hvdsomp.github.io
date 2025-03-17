@@ -704,7 +704,7 @@ values for the attributes on the link are as follows:
                     <div class="t100_2"><div class="style3">
     <a id="archiving"><h1>5. Archiving considerations</h1></a>
     
-    These are directions for Web Archives that ingest, store, and replay web pages that contain Robust Links:
+Web Archives that ingest, store, and replay web pages that contain Robust Links must take the following directions into account:
 
 <ul>
 <li>
@@ -714,7 +714,7 @@ For links in pages for which <code>data-versiondate</code>, <code>data-versionur
 For links for which <code>data-versiondate</code>, <code>data-versionurl</code>, and/or <code>data-originalurl</code> are not provided, web archives must not add them.
 </li>
 <li>
-For links for which the URI of a snapshot is provided as the value of the href attribute, web archives that create a snapshot of that snapshot must adhere to the "<a href="https://datatracker.ietf.org/doc/html/rfc7089#section-4.5.6"Sticky <code>Memento-Datetime and <code>original Link</a>" provision of <a href="https://datatracker.ietf.org/doc/rfc7089/">RFC7089</a>: the <code>Memento-Datetime and the <code>original" link provided in the HTTP header of the former snapshot should be maintained and be provided for the snapshot of the former snapshot.
+For links for which the URI of a snapshot is provided as the value of the href attribute, web archives that create a snapshot of that snapshot must adhere to the <a href="https://datatracker.ietf.org/doc/html/rfc7089#section-4.5.6"/>Sticky <code>Memento-Datetime and <code>original Link</a> provision of <a href="https://datatracker.ietf.org/doc/rfc7089/">RFC7089</a>: the <code>Memento-Datetime</code> and the <code>original</code> link provided in the HTTP header of the former snapshot should be maintained and be provided for the snapshot of the former snapshot.
 </li>
 <li>
 For links in pages for which <code>data-versiondate</code>, <code>data-versionurl</code>, and/or <code>data-originalurl</code> are provided, web archives should consider leveraging the provided values in their replay interfaces.
