@@ -230,9 +230,10 @@ ol.nested-counter-list ol {
   <ol>
   <li><a href="#example-live">Linking to a live web resource</a></li>
   <li><a href="#example-snapshot-1">Linking to a snapshot - Live web resource provides motivation</a>
-    <li><a href="#example-snapshot-2">Linking to a snapshot - Snapshot provides motivation</a>
+  <li><a href="#example-snapshot-2">Linking to a snapshot - Snapshot provides motivation</a>
   </ol>
-  </li>
+</li>
+<li><a href="#archiving">Archiving considerations</a>
 <li><a href="#appendix">Appendix</a>
 <ol>
 <li><a href="#abnf-1">ABNF for <code>data-versiondate</code></a></li>
@@ -699,12 +700,35 @@ values for the attributes on the link are as follows:
     
         </div></div>
     
+    
+                    <div class="t100_2"><div class="style3">
+    <a id="archiving"><h1>5. Archiving considerations</h1></a>
+    
+    These are directions for Web Archives that ingest, store, and replay web pages that contain Robust Links:
+
+<ul>
+<li>
+For links in pages for which <code>data-versiondate</code>, <code>data-versionurl</code>, and/or <code>data-originalurl</code> are provided, web archives must leave the values untouched.
+</li>
+<li>
+For links for which <code>data-versiondate</code>, <code>data-versionurl</code>, and/or <code>data-originalurl</code> are not provided, web archives must not add them.
+</li>
+<li>
+For links for which the URI of a snapshot is provided as the value of the href attribute, web archives that create a snapshot of that snapshot must adhere to the "<a href="https://datatracker.ietf.org/doc/html/rfc7089#section-4.5.6"Sticky <code>Memento-Datetime and <code>original Link</a>" provision of <a href="https://datatracker.ietf.org/doc/rfc7089/">RFC7089</a>: the <code>Memento-Datetime and the <code>original" link provided in the HTTP header of the former snapshot should be maintained and be provided for the snapshot of the former snapshot.
+</li>
+<li>
+For links in pages for which <code>data-versiondate</code>, <code>data-versionurl</code>, and/or <code>data-originalurl</code> are provided, web archives should consider leveraging the provided values in their replay interfaces.
+</li>
+</ul>
+    
+            </div></div>
+    
                 <div class="t100_2"><div class="style3">
-    <a id="appendix"><h1>5. Appendix</h1></a>
+    <a id="appendix"><h1>6. Appendix</h1></a>
     </div></div>
     
                     <div class="t100_2"><div class="style3">
-    <a id="abnf-1"><h2>5.1. ABNF for <code>data-versiondate</code></h2></a>
+    <a id="abnf-1"><h2>6.1. ABNF for <code>data-versiondate</code></h2></a>
     
      Valid values for the <code>data-versiondate</code> attribute are defined by the below ABNF that reuses the following constructs:
      <ul>
@@ -726,7 +750,7 @@ web-archive-datetime = date-fullyear date-month date-mday time-hour time-minute 
     </div></div>
     
                     <div class="t100_2"><div class="style3">
-    <a id="abnf-2"><h2>5.2. ABNF for <code>data-versionurl</code></h2></a>
+    <a id="abnf-2"><h2>6.2. ABNF for <code>data-versionurl</code></h2></a>
     
     Valid values for the <code>data-versionurl</code> attribute are defined by the below ABNF that reuses the following constructs:
     <ul>
