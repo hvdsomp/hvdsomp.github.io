@@ -152,13 +152,12 @@ ol.nested-counter-list ol {
       
         <div class="t100_1"><div class="style3"><h1>Robust Links</h1>
             <div class="t100_2" style="color:red;">
-    EXPERIMENTAL DRAFT REVISION OF <a href="https://robustlinks.mementoweb.org/spec/" 
+    EXPERIMENTAL DRAFT REVISION OF <a href="http://web.archive.org/web/20201018132742/https://robustlinks.mementoweb.org/spec/" 
                                       data-originalurl="https://robustlinks.mementoweb.org/spec/" 
-                                      data-versiondate="2020-10-18T12:00:00Z"
-                                      data-versionurl="http://web.archive.org/web/20201018132742/https://robustlinks.mementoweb.org/spec/">https://robustlinks.mementoweb.org/spec/</a>
+                                      data-versiondate="2020-10-18T12:00:00Z">http://web.archive.org/web/20201018132742/https://robustlinks.mementoweb.org/spec/</a>
            </div>
   <br />
-         Last updated: March 17, 2025
+         Last updated: July 7, 2025
        </div></div>
     
 <br>
@@ -223,7 +222,6 @@ ol.nested-counter-list ol {
   <li><a href="#data-versiondate"><code>data-versiondate</code></a></li>
   <li><a href="#data-versionurl"><code>data-versionurl</code></li>
   <li><a href="#data-originalurl"><code>data-originalurl</code></li>
-  <li><a href="#missing-attribute">Missing attribute information</li>
   </ol>
   </li>
 <li><a href="#examples">Examples</a>
@@ -231,6 +229,13 @@ ol.nested-counter-list ol {
   <li><a href="#example-live">Linking to a live web resource</a></li>
   <li><a href="#example-snapshot-1">Linking to a snapshot - Live web resource provides motivation</a>
   <li><a href="#example-snapshot-2">Linking to a snapshot - Snapshot provides motivation</a>
+  </ol>
+</li>
+<li><a href="#client">Client considerations</a>
+  <ol>
+  <li><a href="#missing-attribute">Missing attribute information</a></li>
+  <li><a href="#no-rewrite">Safeguarding Robust Links in web archives</a></li>
+  <li><a href="#security">Security</a></li>
   </ol>
 </li>
 <li><a href="#archiving">Archiving considerations</a>
@@ -296,18 +301,7 @@ As shown in the <a href="#examples">examples</a>, depending on the motivation fo
     </ul>   
 
       When these <code>data-*</code> attributes are provided in a machine-actionable manner, as detailed in the below sub-sections, 
-      client applications can be devised that support several pathways to visit a linked resource:
-    <ul>
-    <li>Using <code>data-originalurl</code>: Visiting the resource in its current state. Cases exist in which that is not be possible 
-    because the resource no longer exists. In such cases, <code>data-originalurl</code> still provides relevant provenance information.</li>
-    <li>Using <code>data-originalurl</code> in combination with <code>data-versiondate</code>: Finding snapshots of the resource that are temporally close the 
-    intended linking date, in case no snapshots were created around the time of linking, 
-    or in case snapshots that were created become temporally or permanently inaccessible.</li>
-
-    <li>Using <code>data-versionurl</code>: Visiting each snapshot of the resource that is listed.</li>
-    <li>Using <code>data-originalurl</code> in combination with <code>data-versionurl</code>: Finding snapshots of the resource that are temporally close the dates snapshots were created, 
-    in case those snapshots becomes temporally or permanently inaccessible.</li> 
-     </ul></li></ul>  
+      <a href="#client">client applications</a> can be devised that support several pathways to visit a linked resource.  
      
     </div></div>
         
@@ -376,9 +370,10 @@ As shown in the <a href="#examples">examples</a>, depending on the motivation fo
 
  <br /><br /> 
  
-        A value provided for <code>data-versiondate</code> must be interpreted as noon <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a> of the 
-        indicated date, i.e. YYYY-MM-DD must be interpreted as YYYY-MM-DDT12:00:00Z and YYYYMMDD must be interpreted as YYYYMMDD120000. 
-
+ Values for the <code>data-versiondate</code> attribute must only be provided at the granularity available to the linker, 
+i.e. should not be artificially generated on the basis of a known date value.
+ 
+       
 
         
             </div></div>
@@ -395,35 +390,14 @@ As shown in the <a href="#examples">examples</a>, depending on the motivation fo
     <b>Example</b> <code>data-versionurl="https://web.archive.org/web/20241121100333/https://www.w3.org/ https://perma.cc/44TF-9JXB 20241120164333"</code>
 
          <br /><br />      
-    
-     A snapshot datetime provided in <code>data-versionurl</code> must be interpreted as noon <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a> of the 
-        indicated date, i.e. YYYY-MM-DD must be interpreted as YYYY-MM-DDT12:00:00Z and YYYYMMDD must be interpreted as YYYYMMDD120000. 
-
-    </div></div>
-    
-    
-    <div class="t100_2"><div class="style3">
-    <a id="missing-attribute"><h2>3.5. Missing attribute information</h2></a>
-
-Values for the <code>data-versiondate</code> attribute must only be provided at the granularity available to the linker, 
-i.e. should not be artificially generated on the basis of a known date value.
-
-           <br /><br />
-           
-         In case no value is provided for the <code>data-versiondate</code> attribute, client applications may attempt to determine a plausible value, 
-         taking the linking context into account. For example, a client application might decide to use the creation date or last modification date of the 
-         HTML page in which the Robust Link is provided as the value for <code>data-versiondate</code>.
          
-        <br /><br />
-        
-    In case no value is provided for the <code>data-originalurl</code> attribute, client applications may attempt to determine a plausible value, 
-    taking the linking context into account. 
-    For example, as shown in the <a href="#examples">Examples</a>, the URI provided in <code>data-originalurl</code>
-    commonly, but not always, identifies the same resource as the URI provided for the <code>href</code> attribute. 
-    Therefore, in cases in which <code>data-originalurl</code> is not provided, client applications might decide to use 
-    (the absolute URI rendition of) the URI in <code>href</code> as the value for <code>data-originalurl</code>.
-
+Snapshot datetime values provided in the <code>data-versionurl</code> attribute must only be provided at the granularity available to the linker, 
+i.e. should not be artificially generated on the basis of a known date value.
+     
     </div></div>
+    
+    
+  
     
     
         
@@ -701,8 +675,82 @@ values for the attributes on the link are as follows:
         </div></div>
     
     
+                        <div class="t100_2"><div class="style3">
+    <a id="client"><h1>5. Client considerations</h1></a>
+    
+    Robust Links provided in an HTML page can be made actionable by including JavaScript code that 
+    leverages the <code>data-*</code> attributes provided on links. As such, client applications can be devised that 
+    support several pathways to visit a linked resource:
+    <ul>
+    <li>Using <code>data-originalurl</code>: Visiting the resource in its current state. Cases exist in which that is not be possible 
+    because the resource no longer exists. In such cases, <code>data-originalurl</code> still provides relevant provenance information.</li>
+    <li>Using <code>data-originalurl</code> in combination with <code>data-versiondate</code>: Finding snapshots of the resource that are temporally close the 
+    intended linking date, in case no snapshots were created around the time of linking, 
+    or in case snapshots that were created become temporally or permanently inaccessible.</li>
+
+    <li>Using <code>data-versionurl</code>: Visiting each snapshot of the resource that is listed.</li>
+    <li>Using <code>data-originalurl</code> in combination with the snapshot dates provided by <code>data-versionurl</code>: Finding snapshots of the resource that are temporally close the dates snapshots were created, 
+    in case those snapshots becomes temporally or permanently inaccessible.</li> 
+     </ul></li></ul>  
+     
+     The remainder of this section provides guidance for client development.
+    
+      <div class="t100_2"><div class="style3">
+    <a id="missing-attribute"><h2>5.1. Missing attribute information</h2></a>
+
+ A value provided at date-level granularity for <code>data-versiondate</code> must be interpreted as noon <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a> of the 
+        indicated date, i.e. YYYY-MM-DD must be interpreted as YYYY-MM-DDT12:00:00Z and YYYYMMDD must be interpreted as YYYYMMDD120000. 
+
+<br /><br />
+
+           A snapshot datetime provided at date-level granularity for <code>data-versionurl</code> must be interpreted as noon <a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC</a> of the 
+        indicated date, i.e. YYYY-MM-DD must be interpreted as YYYY-MM-DDT12:00:00Z and YYYYMMDD must be interpreted as YYYYMMDD120000. 
+
+   <br /><br />        
+           
+         In case no value is provided for the <code>data-versiondate</code> attribute, client applications may attempt to determine a plausible value, 
+         taking the linking context into account. For example, a client application might decide to use the creation date or last modification date of the 
+         HTML page in which the Robust Link is provided as the value for <code>data-versiondate</code>.
+         
+        <br /><br />
+        
+    In case no value is provided for the <code>data-originalurl</code> attribute, client applications may attempt to determine a plausible value, 
+    taking the linking context into account. 
+    For example, as shown in the <a href="#examples">Examples</a>, the URI provided in <code>data-originalurl</code>
+    commonly, but not always, identifies the same resource as the URI provided for the <code>href</code> attribute. 
+    Therefore, in cases in which <code>data-originalurl</code> is not provided, client applications might decide to use 
+    (the absolute URI rendition of) the URI in <code>href</code> as the value for <code>data-originalurl</code>.
+
+    </div></div>
+    
+     <div class="t100_2"><div class="style3">
+    <a id="no-rewrite"><h2>5.2. Safeguarding Robust Links in web archives</h2></a>
+    
+    When replaying an archived HTML page, web archives routinely rewrite the URIs provided in that page. 
+    For example, when replaying a page that has a link to 
+    <code>https://www.w3.org/</code>, the Internet Archive will rewrite that link to point at, say, 
+    <code>https://web.archive.org/web/20241121100333/https://www.w3.org/</code>. In the latter URI, <code>20241121100333</code> 
+    is the datetime that the linked resource was archived as part of the process of archiving the HTML page 
+    that contains the link. 
+    
+            <br /><br />
+            
+    In order to avoid URI-rewriting for URIs provided in the <code>data-originalurl</code> and <code>data-versionurl</code> 
+    attributes of a Robust Link, Robust Link client applications must include a <code>_noRewrite</code> token on these attributes. This 
+    will serve as a directive to the a web archive's replay engine to leave the URIs intact.
+    
+    </div></div>
+    
+         <div class="t100_2"><div class="style3">
+    <a id="security"><h2>5.3. Security</h2></a>
+    
+    here
+    
+    </div></div>
+    
+    
                     <div class="t100_2"><div class="style3">
-    <a id="archiving"><h1>5. Archiving considerations</h1></a>
+    <a id="archiving"><h1>6. Archiving considerations</h1></a>
     
 Web Archives that ingest, store, and replay web pages that contain Robust Links must take the following directions into account:
 
@@ -727,11 +775,11 @@ For links in pages for which <code>data-versiondate</code>, <code>data-versionur
             </div></div>
     
                 <div class="t100_2"><div class="style3">
-    <a id="appendix"><h1>6. Appendix</h1></a>
+    <a id="appendix"><h1>7. Appendix</h1></a>
     </div></div>
     
                     <div class="t100_2"><div class="style3">
-    <a id="abnf-1"><h2>6.1. ABNF for <code>data-versiondate</code></h2></a>
+    <a id="abnf-1"><h2>7.1. ABNF for <code>data-versiondate</code></h2></a>
     
      Valid values for the <code>data-versiondate</code> attribute are defined by the below ABNF that reuses the following constructs:
      <ul>
@@ -753,7 +801,7 @@ web-archive-datetime = date-fullyear date-month date-mday time-hour time-minute 
     </div></div>
     
                     <div class="t100_2"><div class="style3">
-    <a id="abnf-2"><h2>6.2. ABNF for <code>data-versionurl</code></h2></a>
+    <a id="abnf-2"><h2>7.2. ABNF for <code>data-versionurl</code></h2></a>
     
     Valid values for the <code>data-versionurl</code> attribute are defined by the below ABNF that reuses the following constructs:
     <ul>
@@ -770,11 +818,27 @@ snapshot-URI = scheme ":" "//" authority path-absolute [ "?" query ] [ "#" fragm
            </div></div>
        
         <div class="t100_2"><div class="style3">
-           <a id="acknowledgments"><h1>6. Acknowledgments</h1></a>
-       
-The original version of the specification also included the following authors: Harihar Shankar (Los Alamos National Laboratory), 
-Richard Wincewicz (University of Edinburgh). 
+           <a id="acknowledgments"><h1>8. Acknowledgments</h1></a>
+
+The Robust Links approach is an outcome of the 2013-2015 <a href="https://web.archive.org/web/20140517090658/http://hiberlink.org/" data-versiondate="20140517" data-originalurl="http://hiberlink.org">Hiberlink project</a> 
+that was funded by the <a href="https://web.archive.org/web/20130329052959/http://www.mellon.org/" data-versiondate="20130329" data-originalurl="http://www.mellon.org/">Andrew W. Mellon Foundation</a>. 
+The project was a collaboration between The University of Edinburgh (<a href="https://web.archive.org/web/20140208000945/http://edina.ac.uk/" data-versiondate="20140208" data-originalurl="https://edina.ac.uk">Edina</a> 
+and <a href="https://web.archive.org/web/20140422061821/http://www.ed.ac.uk/schools-departments/informatics/" data-versiondate="20140422" data-originalurl="https://informatics.ed.ac.uk">the School of Informatics</a>) 
+and the Los Alamos National Laboratory (<a href="https://web.archive.org/web/20150203092304/http://www.lanl.gov/library/about/research-prototyping.php" data-versiondate="20150203" data-originalurl="http://www.lanl.gov/library/about/research-prototyping.php">Research Library Prototyping Team</a>), with respective Principal Investigators Peter Burnhill and 
+Herbert Van de Sompel. 
+
 <br /><br />
+
+The project researched the extent of reference rot (the combination of link rot and content drift, the latter a term originally coined by the project) 
+for links to web at large resource found in scholarly papers. The research leveraged several large scholarly corpora and the major findings were published in 
+two papers:
+<ul>
+<li>Klein, M., Van de Sompel, H., Sanderson, R., Shankar, H., Balakireva, L., Zhou K., and Tobin, R. (2014) Scholarly Context Not Found: One in Five Articles Suffers from Reference Rot. PLoS ONE, 9(12): e115253. <a href="https://doi.org/10.1371/journal.pone.0115253">https://doi.org/10.1371/journal.pone.0115253</a></li> 
+<li>Jones, S., Van de Sompel, H., Shankar, H., Klein, M., Tobin, R., and Grover, C. (2016) Scholarly Context Adrift: Three out of Four URI References Lead to Changed Content. PLoS ONE, 11(12): e0167475. <a href="https://doi.org/10.1371/journal.pone.0167475">https://doi.org/10.1371/10.1371/journal.pone.0167475</a></li> 
+</ul>
+
+The <a href="https://web.archive.org/web/20151115040906/https://robustlinks.mementoweb.org/spec/" data-versiondate="20151115" data-originalurl="https://robustlinks.mementoweb.org/spec/">original version of the Robust Links specification</a> also included the following authors: Harihar Shankar (Los Alamos National Laboratory), 
+Richard Wincewicz (University of Edinburgh). 
 
     </div></div>
     
