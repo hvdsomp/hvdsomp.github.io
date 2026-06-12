@@ -1,0 +1,14 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://hvdsomp.info/maps/vienna_1917/annotation1.json",
+  "type": "Annotation",
+  "motivation": "painting",
+  "body": {
+    "id": "https://hvdsomp.info/maps/vienna_1917/fullimage.jpg",
+    "type": "Image",
+    "format": "image/jpeg",
+    "height": 5854,
+    "width": 7187
+  },
+  "target": "https://hvdsomp.info/maps/vienna_1917/canvas.json"
+}

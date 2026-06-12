@@ -1,0 +1,172 @@
+{
+  "@context": "http://iiif.io/api/presentation/3/context.json",
+  "id": "https://hvdsomp.info/maps/vienna_1917/manifest.json",
+  "type": "Manifest",
+  "label": {
+    "en": [
+      "Vienna 1917"
+    ]
+  },
+  "metadata": [
+    {
+      "label": {
+        "en": [
+          "Author"
+        ]
+      },
+      "value": {
+        "none": [
+          "Geripp Offiz. R. Vogl, Terrain Offiz. R. Karbiutz, Assist. L. Nikel"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Published"
+        ]
+      },
+      "value": {
+        "en": [
+          "Austria, 1917"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Publisher"
+        ]
+      },
+      "value": {
+        "de": [
+          "[Austria] : k.u.k. militär-geographisches Institut"
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Terms of Use"
+        ]
+      },
+      "value": {
+        "en": [
+          "No known copyright restrictions.",
+          "No known restrictions on use."
+        ]
+      }
+    },
+    {
+      "label": {
+        "en": [
+          "Format"
+        ]
+      },
+      "value": {
+        "en": [
+          "Maps"
+        ]
+      }
+    }
+  ],
+  "thumbnail": [
+    {
+      "id": "https://hvdsomp.info/maps/vienna_1917/thumbnail.jpg",
+      "type": "Image",
+      "format": "image/jpeg",
+      "height": 244,
+      "width": 300
+    }
+  ],
+  "navDate": "1917-01-01T00:00:00Z",
+  "rights": "No known copyright restrictions. No known restrictions on use.",
+  "requiredStatement": {
+    "label": {
+      "en": [
+        "Attribution"
+      ]
+    },
+    "value": {
+      "en": [
+        "Provided Wikimedia Commons"
+      ]
+    }
+  },
+  "provider": [
+    {
+      "id": "https://commons.wikimedia.org/wiki/Commons:Welcome",
+      "type": "Agent",
+      "label": {
+        "en": [
+          "Wikimedia Commons, Welcome"
+        ]
+      },
+      "homepage": [
+        {
+          "id": "https://commons.wikimedia.org/wiki/Main_Page",
+          "type": "Text",
+          "label": {
+            "en": [
+              "Wikimedia Commons, Homepage"
+            ]
+          },
+          "format": "text/html"
+        }
+      ],
+      "logo": [
+        {
+          "id": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Commons-logo.svg",
+          "type": "Image",
+          "format": "image/svg+xml"
+        }
+      ]
+    }
+  ],
+  "rendering": [
+    {
+      "id": "https://hvdsomp.info/maps/vienna_1917/fullimage.jpg",
+      "type": "Text",
+      "label": {
+        "en": [
+          "Download as JPEG"
+        ]
+      },
+      "format": "image/jpg"
+    }
+  ],
+  "items": [
+    {
+      "id": "https://hvdsomp.info/maps/vienna_1917/canvas.json",
+      "type": "Canvas",
+      "label": {
+        "none": [
+          "empty canvas"
+        ]
+      },
+      "height": 5854,
+      "width": 7187,
+      "items": [
+        {
+          "id": "https://hvdsomp.info/maps/vienna_1917/annotations.json",
+          "type": "AnnotationPage",
+          "items": [
+            {
+              "id": "https://hvdsomp.info/maps/vienna_1917/annotation1.json",
+              "type": "Annotation",
+              "motivation": "painting",
+              "body": {
+                "id": "https://hvdsomp.info/maps/vienna_1917/fullimage.jpg",
+                "type": "Image",
+                "format": "image/jpeg",
+                "height": 5854,
+                "width": 7187
+              },
+              "target": "https://hvdsomp.info/maps/vienna_1917/canvas.json"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
