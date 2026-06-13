@@ -1,0 +1,32 @@
+{
+  "tiles" : [ {
+    "scaleFactors" : [ 32, 16, 8, 4, 2, 1 ],
+    "width" : 1024,
+    "height" : 1024
+  } ],
+  "protocol" : "http://iiif.io/api/image",
+  "sizes" : [ {
+    "width" : 225,
+    "height" : 183
+  }, {
+    "width" : 450,
+    "height" : 366
+  }, {
+    "width" : 899,
+    "height" : 732
+  }, {
+    "width" : 1797,
+    "height" : 1464
+  }, {
+    "width" : 3594,
+    "height" : 2927
+  }, {
+    "width" : 7187,
+    "height" : 5854
+  } ],
+  "profile" : "http://iiif.io/api/image/2/level0.json",
+  "width" : 7187,
+  "@id" : "https://patrickhochstenbach.net/test/zoom/iiif/fullimage",
+  "@context" : "http://iiif.io/api/image/2/context.json",
+  "height" : 5854
+}

@@ -140,7 +140,7 @@
       "type": "Canvas",
       "label": {
         "none": [
-          "empty canvas"
+          "Vienna 1917"
         ]
       },
       "height": 5854,
@@ -159,7 +159,14 @@
                 "type": "Image",
                 "format": "image/jpeg",
                 "height": 5854,
-                "width": 7187
+                "width": 7187,
+                "service": [
+                  {
+                    "id": "https://hvdsomp.info/maps/vienna_1917/iiif/fullimage/",
+                    "type": "ImageService2",
+                    "profile": "level0"
+                  }
+                ]
               },
               "target": "https://hvdsomp.info/maps/vienna_1917/canvas.json"
             }
